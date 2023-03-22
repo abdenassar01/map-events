@@ -32,7 +32,7 @@ let geoJson = L.geoJson(null, {
     onEachFeature: onEachFeature,
 }).addTo(map);
 
-fetch("assets/data.json")
+fetch("frontend/assets/data.json")
     .then(data => data.json())
     .then(res => geoJson.addData(res))
     .catch(err => console.log(err))
@@ -55,9 +55,14 @@ function resetHighlight(e) {
 }
 
 function zoomToFeature(e) {
-
-    //TODO: fetch data and create markers
-
+    fetch("api/events.php?departement=" + e.target.feature.properties.name)
+        .then(res => res.json())
+        .then(events => {
+            events.map(event => {
+                L.marker([event.lng, event.lat]).addTo(map);
+            })
+        })
+        .catch(err => console.log(err))
     map.fitBounds(e.target.getBounds());
 }
 
