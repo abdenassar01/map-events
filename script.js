@@ -32,9 +32,10 @@ let geoJson = L.geoJson(null, {
     onEachFeature: onEachFeature,
 }).addTo(map);
 
-fetch("./data.json")
+fetch("assets/data.json")
     .then(data => data.json())
     .then(res => geoJson.addData(res))
+    .catch(err => console.log(err))
 
 function highlightFeature(e) {
     let layer = e.target;

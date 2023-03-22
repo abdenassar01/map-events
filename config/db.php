@@ -1,11 +1,11 @@
 <?php
-    define("DB_HOST", "localhost");
+const DB_HOST = "localhost";
 
-    define("DB_USER", "root");
+    const DB_USER = "root";
 
-    define("DB_PASS","27701");
+    const DB_PASS = "27701";
 
-    define("DB_NAME","map_events");
+    const DB_NAME = "map_events";
 
     try {
         $db = new PDO("mysql:dbname=".DB_NAME.";host=".DB_HOST, DB_USER, DB_PASS);
