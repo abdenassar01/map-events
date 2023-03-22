@@ -1,6 +1,4 @@
-// import { CAMEROUN_DEPARTEMEMT } from "./data";
-
-let map = L.map('map').setView([37.8, -96], 4);
+let map = L.map('map').setView([5.694, 12.742], 7);
 
 let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -18,43 +16,6 @@ function getColor(d) {
                                 '#FFEDA0';
 }
 
-let states = [{
-    "type": "Feature",
-    "properties": {
-        "nbrEvents": 10,
-        "events": []
-    },
-    "geometry": {
-        "type": "Polygon",
-        "coordinates": [[
-            [-104.05, 48.99],
-            [-97.22,  48.98],
-            [-96.58,  45.94],
-            [-104.03, 45.94],
-            [-104.05, 48.99]
-        ]]
-    }
-}, {
-    "type": "Feature",
-    "properties": {
-        "nbrEvents": 5,
-        "events": [
-            [39.02416845410678, -105.57041564629472],
-            [38.14259283857374, -106.77781996978813]
-        ]
-    },
-    "geometry": {
-        "type": "Polygon",
-        "coordinates": [[
-            [-109.05, 41.00],
-            [-102.06, 40.99],
-            [-102.03, 36.99],
-            [-109.04, 36.99],
-            [-109.05, 41.00]
-        ]]
-    }
-}];
-
 function style(feature) {
     return {
         fillColor: getColor(feature.properties.nbrEvents),
@@ -66,10 +27,14 @@ function style(feature) {
     };
 }
 
-let geoJson = L.geoJson(states, {
+let geoJson = L.geoJson(null, {
     style: style,
     onEachFeature: onEachFeature,
 }).addTo(map);
+
+fetch("./data.json")
+    .then(data => data.json())
+    .then(res => geoJson.addData(res))
 
 function highlightFeature(e) {
     let layer = e.target;
@@ -91,7 +56,7 @@ function resetHighlight(e) {
 function zoomToFeature(e) {
 
     //TODO: fetch data and create markers
-
+    console.log(e.target)
     map.fitBounds(e.target.getBounds());
 }
 
