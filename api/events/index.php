@@ -1,11 +1,11 @@
 <?php
 
-    include("../config/db.php");
+    include("../../config/db.php");
 
-    if(isset($_GET['departement']) && !empty($db)){
-        $req = "select E.*, D.name from event E inner join departement D on E.departement_id = D.id where D.name = :departement;";
+    if(isset($_GET['department']) && !empty($db)){
+        $req = "select E.*, D.name from event E inner join department D on E.departement_id = D.id where D.name = :department;";
         $st = $db->prepare($req);
-        $st->bindParam(":departement", $_GET['departement']);
+        $st->bindParam(":department", $_GET['department']);
         if($st->execute()){
             echo json_encode($st->fetchAll(PDO::FETCH_ASSOC));
         }
@@ -17,8 +17,4 @@
             echo json_encode($st->fetchAll(PDO::FETCH_ASSOC));
         }
     }
-
-
-
-
 ?>

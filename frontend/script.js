@@ -18,13 +18,13 @@ function getColor(d) {
 
 function style(feature) {
     return {
-        fillColor: getColor(feature.properties.nbrEvents),
+        fillColor: getColor(feature.properties.nb_events),
         weight: 2,
         opacity: 1,
         color: 'white',
         dashArray: '3',
         fillOpacity: 0.7
-    };
+    }
 }
 
 let geoJson = L.geoJson(null, {
@@ -34,7 +34,21 @@ let geoJson = L.geoJson(null, {
 
 fetch("frontend/assets/data.json")
     .then(data => data.json())
-    .then(res => geoJson.addData(res))
+    .then(res => {
+        let features = res.features.map(feature => {
+           let nbr_events = 0;
+
+            return {
+                ...feature,
+                properties: {
+                    ...feature.properties,
+                    nb_events: nbr_events,
+                }
+            }
+        })
+        console.log(features)
+        geoJson.addData({ type :"FeatureCollection", features: features })
+    })
     .catch(err => console.log(err))
 
 function highlightFeature(e) {
@@ -55,11 +69,12 @@ function resetHighlight(e) {
 }
 
 function zoomToFeature(e) {
-    fetch("api/events.php?departement=" + e.target.feature.properties.name)
+    fetch("api/events/?departement=" + e.target.feature.properties.name)
         .then(res => res.json())
         .then(events => {
             events.map(event => {
-                L.marker([event.lng, event.lat]).addTo(map);
+                L.marker([event.lng, event.lat]).addTo(map)
+                    .bindPopup("<b><center>" + event.title + "</center></b><br>" + event.description)
             })
         })
         .catch(err => console.log(err))
@@ -73,3 +88,4 @@ function onEachFeature(feature, layer) {
         click: zoomToFeature
     });
 }
+
