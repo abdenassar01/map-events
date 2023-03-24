@@ -6,13 +6,13 @@ let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 function getColor(d) {
-    return d > 1000 ? '#800026' :
-        d > 500  ? '#BD0026' :
-            d > 200  ? '#E31A1C' :
-                d > 100  ? '#FC4E2A' :
-                    d > 50   ? '#FD8D3C' :
-                        d > 20   ? '#FEB24C' :
-                            d > 10   ? '#FED976' :
+    return d > 500 ? '#800026' :
+        d > 100  ? '#BD0026' :
+            d > 50  ? '#E31A1C' :
+                d > 20  ? '#FC4E2A' :
+                    d > 10   ? '#FD8D3C' :
+                        d > 5   ? '#FEB24C' :
+                            d > 0   ? '#FED976' :
                                 '#FFEDA0';
 }
 
@@ -35,19 +35,19 @@ let geoJson = L.geoJson(null, {
 fetch("frontend/assets/data.json")
     .then(data => data.json())
     .then(res => {
-        let features = res.features.map(feature => {
-           let nbr_events = 0;
-
-            return {
-                ...feature,
-                properties: {
-                    ...feature.properties,
-                    nb_events: nbr_events,
-                }
-            }
+        res.features.map(feature => {
+           fetch("api/events/count/index.php?departement=" + feature.properties.name)
+               .then(res => res.json())
+               .then(data => {
+                   geoJson.addData({
+                       ...feature,
+                       properties: {
+                           ...feature.properties,
+                           nb_events: data.nbr_events,
+                       }
+                   })
+               })
         })
-        console.log(features)
-        geoJson.addData({ type :"FeatureCollection", features: features })
     })
     .catch(err => console.log(err))
 
