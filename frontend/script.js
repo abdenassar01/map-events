@@ -5,6 +5,8 @@ let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+let markers = [];
+
 function getColor(d) {
     return d > 500 ? '#800026' :
         d > 100  ? '#BD0026' :
@@ -69,6 +71,9 @@ function resetHighlight(e) {
 }
 
 function zoomToFeature(e) {
+
+    markers.forEach(marker => map.removeLayer(marker));
+
     fetch("api/events/?departement=" + e.target.feature.properties.name)
         .then(res => res.json())
         .then(events => {
@@ -79,10 +84,12 @@ function zoomToFeature(e) {
                 popupAnchor: [-3, -76],
             });
             events.map(event => {
-                L.marker([event.lng, event.lat], {
+                const marker = L.marker([event.lng, event.lat], {
                         icon: icon
                 }).addTo(map)
-                    .bindPopup("<b class='title'><center>" + event.title + "</center></b><br>" + event.description)
+                    .bindPopup("<b class='title'><center>" + event.title + "</center></b><br>" + event.description);
+
+                markers.push(marker)
             })
         })
         .catch(err => console.log(err))
