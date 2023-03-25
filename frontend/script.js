@@ -72,9 +72,17 @@ function zoomToFeature(e) {
     fetch("api/events/?departement=" + e.target.feature.properties.name)
         .then(res => res.json())
         .then(events => {
+            const icon = L.icon({
+                iconUrl: 'https://i.imgur.com/QV5j6br.png',
+                iconSize: [30, 30],
+                iconAnchor: [22, 94],
+                popupAnchor: [-3, -76],
+            });
             events.map(event => {
-                L.marker([event.lng, event.lat]).addTo(map)
-                    .bindPopup("<b><center>" + event.title + "</center></b><br>" + event.description)
+                L.marker([event.lng, event.lat], {
+                        icon: icon
+                }).addTo(map)
+                    .bindPopup("<b class='title'><center>" + event.title + "</center></b><br>" + event.description)
             })
         })
         .catch(err => console.log(err))
@@ -88,4 +96,3 @@ function onEachFeature(feature, layer) {
         click: zoomToFeature
     });
 }
-
