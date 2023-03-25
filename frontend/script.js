@@ -8,7 +8,7 @@ let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let markers = [];
 
 function getColor(d) {
-    return d > 500 ? '#800026' :
+    return d > 0 ? '#800026' :
         d > 100  ? '#BD0026' :
             d > 50  ? '#E31A1C' :
                 d > 20  ? '#FC4E2A' :
@@ -38,17 +38,17 @@ fetch("frontend/assets/data.json")
     .then(data => data.json())
     .then(res => {
         res.features.map(feature => {
-           fetch("api/events/count/index.php?departement=" + feature.properties.name)
-               .then(res => res.json())
-               .then(data => {
-                   geoJson.addData({
-                       ...feature,
-                       properties: {
-                           ...feature.properties,
-                           nb_events: data.nbr_events,
-                       }
-                   })
-               })
+            fetch("api/events/count/index.php?departement=" + feature.properties.name)
+                .then(res => res.json())
+                .then(data => {
+                    geoJson.addData({
+                        ...feature,
+                        properties: {
+                            ...feature.properties,
+                            nb_events: data.nbr_events,
+                        }
+                    })
+                })
         })
     })
     .catch(err => console.log(err))
