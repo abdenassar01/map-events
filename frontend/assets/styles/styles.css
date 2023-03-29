@@ -2,12 +2,15 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+}
 
+body{
+    overflow: hidden;
 }
 
 #map{
     width: 100vw;
-    min-height: 80vh;
+    min-height: 90vh;
 }
 
 .title{
