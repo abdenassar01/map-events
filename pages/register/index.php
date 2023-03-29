@@ -12,29 +12,46 @@
 </head>
 <body>
 <?php
+include ("../../config/db.php");
 session_start();
+
 $_SESSION['login'] = "nassar";
 
-if (isset($_POST['signin'])){
-    echo $_POST['email']." - ".$_POST['password'];
+if (isset($_POST['signup'])){
+    if (!empty($db)) {
+        $sql = "insert into user (username, password, role, name, lastname) values (:username, :password, 'USER', :firstname, :lastname);";
+
+        $statement = $db->prepare($sql);
+        $statement->bindParam(":username", $_POST['username']);
+        $statement->bindParam(":password", $_POST['password']);
+        $statement->bindParam(":firstname", $_POST['firstname']);
+        $statement->bindParam(":lastname", $_POST['lastname']);
+
+        if($statement->execute()){
+            header('Location: ../../');
+        }else{
+            echo "<div class='alert alert-danger' role='alert'>error inserting data</div>";
+        }
+    }
+
 }
 ?>
 <div class="d-flex mx-auto p-2 gap-10" style="justify-content: center; align-items: center; min-height: 100vh; flex-wrap: wrap">
     <img src="../../frontend/assets/icons/map.svg" alt="" width="400px" height="auto">
     <form action="#" method="POST" style="min-width: 400px">
         <div class="form-outline mb-4">
-            <label class="form-label" for="email">Name: </label>
-            <input type="email" id="email" name="email" class="form-control" />
+            <label class="form-label" for="firstname">Name: </label>
+            <input type="text" id="firstname" name="firstname" class="form-control" />
         </div>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="email">Lastname: </label>
-            <input type="email" id="email" name="email" class="form-control" />
+            <label class="form-label" for="lastname">Lastname: </label>
+            <input type="text" id="lastname" name="lastname" class="form-control" />
         </div>
 
         <div class="form-outline mb-4">
-            <label class="form-label" for="email">Email address</label>
-            <input type="email" id="email" name="email" class="form-control" />
+            <label class="form-label" for="username">Email address</label>
+            <input type="email" id="username" name="username" class="form-control" />
         </div>
 
         <div class="form-outline mb-4">
@@ -42,7 +59,7 @@ if (isset($_POST['signin'])){
             <input type="password" id="password" name="password" class="form-control" />
         </div>
 
-        <button type="submit" name="signin" class="btn btn-primary btn-block mb-4 m-2">Sign up</button>
+        <button type="submit" name="signup" class="btn btn-primary btn-block mb-4 m-2">Sign up</button>
 
         <div class="text-center">
             <p>Already have an account ? <a href="../login">Log in</a></p>
