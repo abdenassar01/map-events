@@ -8,7 +8,7 @@ let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let markers = [];
 
 function getColor(d) {
-    return d > 0 ? '#800026' :
+    return d > 500 ? '#800026' :
         d > 100  ? '#BD0026' :
             d > 50  ? '#E31A1C' :
                 d > 20  ? '#FC4E2A' :
@@ -103,3 +103,25 @@ function onEachFeature(feature, layer) {
         click: zoomToFeature
     });
 }
+
+let legend = L.control({position: 'bottomright'});
+
+legend.onAdd = function (map) {
+
+    let div = L.DomUtil.create('div', 'info legend'),
+        grades = [0, 10, 20, 50, 100, 200, 500, 1000],
+        labels = [];
+
+    let items = "";
+    for (let i = 0; i < grades.length; i++) {
+        items +=
+            '<div><i class="fa-solid fa-square" style="width: 35px; height: 35px; background:' + getColor(grades[i] + 1) + '"></i> ' +
+            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '</div>' : '+');
+    }
+
+    div.innerHTML = "<div style='display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 5px; border-radius: 5px; background-color: white; min-height: 150px; min-width: 100px'><div>" + items + "</div></div>"
+
+    return div;
+};
+
+legend.addTo(map);
