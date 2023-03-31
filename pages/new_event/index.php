@@ -15,7 +15,8 @@
 
     <style>
         #map{
-            height: 200px;
+            max-height: 100px;
+            width: 82vw;
         }
     </style>
 
@@ -26,8 +27,9 @@
     <?php
         include "../../components/header.php";
     ?>
-    <div id="map" ></div>
     <div class="container content-center mt-5" >
+        <p>Chose event location: </p>
+        <div id="map" ></div>
         <form class="row g-2" onsubmit="validate(e)">
 
             <div class="col-md-6">
@@ -66,21 +68,6 @@
     <?php
 
     ?>
-    <script>
-        let map = L.map('map').setView([5.694, 12.742], 7);
-
-        let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            maxZoom: 19,
-            attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
-        }).addTo(map);
-
-        document
-            .querySelectorAll('[data-tiny-editor]')
-            .forEach(editor =>
-                editor.addEventListener('input', e => console.log(e.target.innerHTML)
-                )
-            );
-    </script>
 
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
             integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
@@ -88,6 +75,8 @@
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/tiny-editor/dist/bundle.js"></script>
+    <script src="index.js">
 
+    </script>
 </body>
 </html>
