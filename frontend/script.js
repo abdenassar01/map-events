@@ -109,8 +109,7 @@ let legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
 
     let div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 10, 20, 50, 100, 200, 500, 1000],
-        labels = [];
+        grades = [0, 10, 20, 50, 100, 200, 500, 1000];
 
     let items = "";
     for (let i = 0; i < grades.length; i++) {
