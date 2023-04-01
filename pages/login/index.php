@@ -11,11 +11,11 @@
 </head>
 <body>
 <?php
-    session_start();
-    $_SESSION['login'] = "nassar";
-
     if (isset($_POST['signin'])){
-        echo $_POST['email']." - ".$_POST['password'];
+        // TODO: get user from database and handle security
+        session_start();
+        $_SESSION['login'] = $_POST['email'];
+        header("Location: ../../");
     }
 ?>
     <div class="d-flex mx-auto p-2 gap-10" style="justify-content: center; align-items: center; min-height: 100vh; flex-wrap: wrap">

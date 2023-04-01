@@ -23,10 +23,13 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-aFq/bzH65dt+w6FI2ooMVUpc+21e0SRygnTpmBvdBgSdnuTN7QbdgL+OapgHtvPp" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
 </head>
+<?php
+    session_start();
+    if(!isset($_SESSION['login'])){
+        header("Location: ../login");
+    }
+?>
 <body>
-    <?php
-        include "../../components/header.php";
-    ?>
     <div class="container content-center mt-5" >
         <p>Chose event location: </p>
         <div id="map" ></div>
