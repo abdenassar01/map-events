@@ -84,7 +84,7 @@ function zoomToFeature(e) {
                 popupAnchor: [-3, -76],
             });
             events.map(event => {
-                const marker = L.marker([event.lng, event.lat], {
+                const marker = L.marker([event.lat, event.lng], {
                         icon: icon
                 }).addTo(map)
                     .bindPopup("<b class='title'><center>" + event.title + "</center></b><br>" + event.description);

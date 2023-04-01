@@ -1,15 +1,6 @@
 <?php
-    echo "Longitude: ".$_POST['longitude'];
-    echo ", Latitude: ".$_POST['latitude'];
-    echo ", Description: ".$_POST['description'];
-    echo ", department: ".$_POST['department'];
-    echo ", Title: ".$_POST['title'];
-    echo ", Type: ".$_POST['type'];
-    echo ", Start Date: ".$_POST['start_date'];
-    echo ", End Date: ".$_POST['end_date'];
-    echo ", Poster: ";
-
     $poster = "";
+    $user = 1;
 
     if($_FILES["poster"]){
         $filename = $_FILES["poster"]["name"];
@@ -18,6 +9,27 @@
 
         if (move_uploaded_file($tempname, $folder)){
             $poster = $filename;
+        }
+    }
+
+    $sql = "INSERT INTO `event` (`departement_id`, `title`, `description`, `type`, `image`, `lng`, `lat`, `user_id`, `start_time`, `end_time`) VALUES ( :department, :title, :description, :type, :poster, :lng, :lat, :user, :start_date, :end_date);";
+
+    include("../../config/db.php");
+    if(!empty($db)){
+        $st = $db->prepare($sql);
+        if ($st->execute(array(
+            ":department" => $_POST['department'],
+            ":description" => $_POST['description'],
+            ":title" => $_POST['title'],
+            ":type" => $_POST['type'],
+            ":poster" => $poster,
+            ":lng" => $_POST['longitude'],
+            ":lat" => $_POST['latitude'],
+            ":user" => $user,
+            ":start_date" => $_POST['start_date'],
+            ":end_date" => $_POST['end_date']
+        ))) {
+            header("Location: ../../");
         }
     }
 
