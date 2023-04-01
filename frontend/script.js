@@ -77,15 +77,14 @@ function zoomToFeature(e) {
     fetch("api/events/?departement=" + e.target.feature.properties.name)
         .then(res => res.json())
         .then(events => {
-            const icon = L.icon({
-                iconUrl: 'https://i.imgur.com/QV5j6br.png',
-                iconSize: [30, 30],
-                iconAnchor: [22, 94],
-                popupAnchor: [-3, -76],
-            });
             events.map(event => {
                 const marker = L.marker([event.lat, event.lng], {
-                        icon: icon
+                        icon: L.icon({
+                            iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB" }.png`,
+                            iconSize: [30, 30],
+                            iconAnchor: [22, 94],
+                            popupAnchor: [-3, -76],
+                        })
                 }).addTo(map)
                     .bindPopup("<b class='title'><center>" + event.title + "</center></b><br>" + event.description);
 
