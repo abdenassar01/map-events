@@ -30,53 +30,48 @@
     <div class="container content-center mt-5" >
         <p>Chose event location: </p>
         <div id="map" ></div>
-        <form class="row g-2" onsubmit="validate(e)">
-
+        <form class="row g-2" method="post" enctype="multipart/form-data" action="../../api/handler/add_event.php">
             <div class="col-md-6">
                 <label class="form-label" for="title">Title:</label>
-                <input type="text" id="title" name="title" class="form-control" />
+                <input type="text" id="title" name="title" class="form-control" required />
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="type">Type:</label>
-                <select class="form-select" aria-label="event type">
-                    <option selected>Open this select menu</option>
-                    <option value="1">One</option>
-                    <option value="2">Two</option>
-                    <option value="3">Three</option>
+                <select class="form-select" name="type" aria-label="event type" required>
+                    <option value="liberation">Événement historique lies à la lutte de libération nationale</option>
+                    <option value="compagne">Événement lies à notre compagne politique actuelle</option>
+                    <option value="culture">Événement culturels actuels</option>
+                    <option value="autre">Événement des autres acteurs société civile</option>
                 </select>
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="start_date">Start Date:</label>
-                <input type="date" id="start_date" name="start_date" class="form-control" />
+                <input type="date" id="start_date" name="start_date" class="form-control" required />
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="end_date">End Date:</label>
-                <input type="date" id="end_date" name="end_date" class="form-control" />
+                <input type="date" id="end_date" name="end_date" class="form-control" required />
             </div>
             <div class="form-outline mb-4">
                 <label class="form-label" for="poster">Poster:</label>
-                <input type="file" id="poster" name="poster" class="form-control" />
+                <input type="file" accept="image/png, image/jpeg" id="poster" name="poster" class="form-control"  required />
             </div>
             <div class="form-outline mb-4 mt-5">
                 <label class="form-label" for="description">Description:</label>
                 <div data-tiny-editor data-bold="no"></div>
             </div>
-
-            <input type="submit" name="signin" class="btn btn-primary btn-block mb-4 m-2" value="add event">
+            <input type="hidden" name="longitude" id="longitude" />
+            <input type="hidden" name="latitude" id="latitude" />
+            <input type="hidden" name="description" id="description" />
+            <input type="submit" name="addEvent" class="btn btn-primary btn-block mb-4 m-2" value="add event">
         </form>
     </div>
-    <?php
-
-    ?>
-
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
             integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
             crossorigin=""></script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha2/dist/js/bootstrap.bundle.min.js" integrity="sha384-qKXV1j0HvMUeCBQ+QVp7JcfGl760yU08IQ+GpUo5hlbpg51QRiuqHAJz8+BrxE/N" crossorigin="anonymous"></script>
     <script src="https://unpkg.com/tiny-editor/dist/bundle.js"></script>
-    <script src="index.js">
-
-    </script>
+    <script src="index.js"></script>
 </body>
 </html>

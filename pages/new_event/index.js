@@ -5,6 +5,12 @@ let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+
+function addEvent(e) {
+    e.preventDefault();
+    console.log(e);
+}
+
 fetch("../../frontend/assets/data.json")
     .then(data => data.json())
     .then(res => {
@@ -56,6 +62,10 @@ let geoJson = L.geoJson(null, {
             let position = L.marker(evt.latlng, {
                 title: feature.properties.name
             }).addTo(map);
+            let longitudeInput = document.getElementById("longitude")
+            let latitudeInput = document.getElementById("latitude")
+            longitudeInput.value = evt.latlng.lng;
+            latitudeInput.value = evt.latlng.lat;
             markers.push(position);
         });
     },
@@ -70,12 +80,12 @@ map.on('click', function(e) {
     markers.push(position);
 });
 
-
-
-
 document
     .querySelectorAll('[data-tiny-editor]')
     .forEach(editor =>
-        editor.addEventListener('input', e => console.log(e.target.innerHTML)
+        editor.addEventListener('input', e => {
+                let description = document.getElementById("description")
+                description.value = e.target.innerHTML;
+            }
         )
     );
