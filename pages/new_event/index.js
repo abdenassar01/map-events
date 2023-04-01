@@ -62,8 +62,10 @@ let geoJson = L.geoJson(null, {
             let position = L.marker(evt.latlng, {
                 title: feature.properties.name
             }).addTo(map);
-            let longitudeInput = document.getElementById("longitude")
-            let latitudeInput = document.getElementById("latitude")
+            let longitudeInput = document.getElementById("longitude");
+            let latitudeInput = document.getElementById("latitude");
+            let department = document.getElementById("department");
+            department.value = feature.properties.name;
             longitudeInput.value = evt.latlng.lng;
             latitudeInput.value = evt.latlng.lat;
             markers.push(position);

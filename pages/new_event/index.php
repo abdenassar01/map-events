@@ -62,6 +62,7 @@
             </div>
             <input type="hidden" name="longitude" id="longitude" />
             <input type="hidden" name="latitude" id="latitude" />
+            <input type="hidden" name="department" id="department" />
             <input type="hidden" name="description" id="description" />
             <input type="submit" name="addEvent" class="btn btn-primary btn-block mb-4 m-2" value="add event">
         </form>

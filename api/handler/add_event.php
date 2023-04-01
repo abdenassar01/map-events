@@ -2,6 +2,7 @@
     echo "Longitude: ".$_POST['longitude'];
     echo ", Latitude: ".$_POST['latitude'];
     echo ", Description: ".$_POST['description'];
+    echo ", department: ".$_POST['department'];
     echo ", Title: ".$_POST['title'];
     echo ", Type: ".$_POST['type'];
     echo ", Start Date: ".$_POST['start_date'];
@@ -19,7 +20,5 @@
             $poster = $filename;
         }
     }
-
-?>
 
 ?>
