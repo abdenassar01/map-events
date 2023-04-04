@@ -87,7 +87,7 @@ function zoomToFeature(e) {
                             popupAnchor: [-3, -76],
                         })
                     }).addTo(map)
-                        .bindPopup("<div style='position: relative; padding-bottom: 50px'><b class='title'><center>" + event.title + `</center></b><br><div style='display: flex; gap:10px; '><img style='border-radius: 2px' width='200' height='100' src='./api/image/${ event.image }' alt='${ event.title }' /><div>${ event.description }</div></div><a class='btn btn-link' style='position: absolute; bottom: 0; right: 0' href='./pages/event_details/?id=${ event.id }'>see details</a></div>`);
+                        .bindPopup("<div style='position: relative; width: 400px; padding-bottom: 50px; '><b class='title'><center>" + event.title + `</center></b><br><img style='border-radius: 2px; height: 100%' width='99%' src='./api/image/${ event.image }' alt='${ event.title }' /><div style='padding: 10px'>${ event.description }</div><a class='btn btn-link' style='position: absolute; bottom: 0; right: 0' href='./pages/event_details/?id=${ event.id }'>see details</a></div>`);
 
                     markers.push(marker)
                 }

@@ -34,13 +34,13 @@ body{
 }
 
 .leaflet-popup-content-wrapper {
-    border-radius: 5px;
+    border-radius: 2px;
     padding-top: 20px;
     width: 400px;
 }
 
 .leaflet-popup-content-wrapper .leaflet-popup-content {
-    border-radius: 5px;
+    border-radius: 2px;
     margin: 0;
 }
 
