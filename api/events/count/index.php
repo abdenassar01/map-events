@@ -10,7 +10,7 @@
                 echo json_encode($st->fetchAll(PDO::FETCH_ASSOC)[0]);
             }
         }else{
-            $req = "select count(*) as 'nbr_events' from event;";
+            $req = "select count(*) as 'nbr_events' from event and status = 'approved';";
             $st = $db->prepare($req);
             if($st->execute()){
                 echo json_encode($st->fetchAll(PDO::FETCH_ASSOC)[0]);
