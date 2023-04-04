@@ -1,14 +1,24 @@
 let map = L.map('map').setView([5.694, 12.742], 7);
 
+let longitudeInput = document.getElementById("longitude");
+let latitudeInput = document.getElementById("latitude");
+let department = document.getElementById("department");
+
 let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
-
-function addEvent(e) {
-    e.preventDefault();
-    console.log(e);
+if (!navigator.geolocation) {
+    console.log("Your browser doesn't support geolocation feature!");
+} else {
+    navigator.geolocation.getCurrentPosition((position) => {
+        const currentLocation = L.marker([position.coords.latitude, position.coords.longitude])
+                                    .addTo(map);
+        longitudeInput.value = position.coords.longitude;
+        latitudeInput.value = position.coords.latitude;
+        markers.push(currentLocation);
+    })
 }
 
 fetch("../../frontend/assets/data.json")
@@ -62,9 +72,6 @@ let geoJson = L.geoJson(null, {
             let position = L.marker(evt.latlng, {
                 title: feature.properties.name
             }).addTo(map);
-            let longitudeInput = document.getElementById("longitude");
-            let latitudeInput = document.getElementById("latitude");
-            let department = document.getElementById("department");
             fetch("../../api/department/?name=" + feature.properties.name)
                 .then(res => res.json())
                 .then(data => {

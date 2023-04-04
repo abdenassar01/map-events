@@ -33,6 +33,7 @@
     <div class="container content-center mt-5" >
         <p>Chose event location: </p>
         <div id="map" ></div>
+        <br />
         <form class="row g-2" method="post" enctype="multipart/form-data" action="../../api/handler/add_event.php">
             <div class="col-md-6">
                 <label class="form-label" for="title">Title:</label>

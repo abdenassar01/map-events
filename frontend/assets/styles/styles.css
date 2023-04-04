@@ -4,6 +4,22 @@
     box-sizing: border-box;
 }
 
+::-webkit-scrollbar {
+    width: 3px;
+}
+
+::-webkit-scrollbar-track {
+    background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #555;
+}
+
 body{
     overflow-x: hidden;
 }
@@ -15,4 +31,16 @@ body{
 
 .title{
     color: crimson;
+}
+
+.leaflet-popup-content-wrapper {
+    border-radius: 5px;
+    padding-top: 20px;
+    width: 400px;
+
+}
+
+.leaflet-popup-content-wrapper .leaflet-popup-content {
+    border-radius: 5px;
+    margin: 0;
 }
