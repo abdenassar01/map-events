@@ -37,10 +37,10 @@ body{
     border-radius: 5px;
     padding-top: 20px;
     width: 400px;
-
 }
 
 .leaflet-popup-content-wrapper .leaflet-popup-content {
     border-radius: 5px;
     margin: 0;
 }
+

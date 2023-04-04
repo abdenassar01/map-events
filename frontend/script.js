@@ -78,17 +78,19 @@ function zoomToFeature(e) {
         .then(res => res.json())
         .then(events => {
             events.map(event => {
-                const marker = L.marker([event.lat, event.lng], {
+                if (event.status === "approved"){
+                    const marker = L.marker([event.lat, event.lng], {
                         icon: L.icon({
                             iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB" }.png`,
                             iconSize: [30, 30],
                             iconAnchor: [22, 94],
                             popupAnchor: [-3, -76],
                         })
-                }).addTo(map)
-                    .bindPopup("<div style='position: relative; padding-bottom: 50px'><b class='title'><center>" + event.title + `</center></b><br><div style='display: flex; gap:10px; '><img style='border-radius: 2px' width='200' height='100' src='./api/image/${ event.image }' alt='${ event.title }' /><div>${ event.description }</div></div><a class='btn btn-link' style='position: absolute; bottom: 0; right: 0' href='./pages/event_details/?id=${ event.id }'>see details</a></div>`);
+                    }).addTo(map)
+                        .bindPopup("<div style='position: relative; padding-bottom: 50px'><b class='title'><center>" + event.title + `</center></b><br><div style='display: flex; gap:10px; '><img style='border-radius: 2px' width='200' height='100' src='./api/image/${ event.image }' alt='${ event.title }' /><div>${ event.description }</div></div><a class='btn btn-link' style='position: absolute; bottom: 0; right: 0' href='./pages/event_details/?id=${ event.id }'>see details</a></div>`);
 
-                markers.push(marker)
+                    markers.push(marker)
+                }
             })
         })
         .catch(err => console.log(err))
