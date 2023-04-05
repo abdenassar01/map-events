@@ -15,8 +15,6 @@
 include ("../../config/db.php");
 session_start();
 
-$_SESSION['login'] = "nassar";
-
 if (isset($_POST['signup'])){
     if (!empty($db)) {
         $sql = "insert into user (username, password, role, name, lastname) values (:username, :password, 'USER', :firstname, :lastname);";
@@ -28,12 +26,12 @@ if (isset($_POST['signup'])){
         $statement->bindParam(":lastname", $_POST['lastname']);
 
         if($statement->execute()){
+            $_SESSION['login'] = $_POST['firstname'].' '.$_POST['lastname'];
             header('Location: ../../');
         }else{
-            echo "<div class='alert alert-danger' role='alert'>error inserting data</div>";
+            echo "<div class='alert alert-danger' role='alert'>error registering new user</div>";
         }
     }
-
 }
 ?>
 <div class="d-flex mx-auto p-2 gap-10" style="justify-content: center; align-items: center; min-height: 100vh; flex-wrap: wrap">
@@ -41,22 +39,22 @@ if (isset($_POST['signup'])){
     <form action="#" method="POST" style="min-width: 400px">
         <div class="form-outline mb-4">
             <label class="form-label" for="firstname">Name: </label>
-            <input type="text" id="firstname" name="firstname" class="form-control" />
+            <input type="text" id="firstname" name="firstname" class="form-control" required />
         </div>
 
         <div class="form-outline mb-4">
             <label class="form-label" for="lastname">Lastname: </label>
-            <input type="text" id="lastname" name="lastname" class="form-control" />
+            <input type="text" id="lastname" name="lastname" class="form-control" required />
         </div>
 
         <div class="form-outline mb-4">
             <label class="form-label" for="username">Email address</label>
-            <input type="email" id="username" name="username" class="form-control" />
+            <input type="email" id="username" name="username" class="form-control" required />
         </div>
 
         <div class="form-outline mb-4">
             <label class="form-label" for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" />
+            <input type="password" id="password" name="password" class="form-control" required />
         </div>
 
         <button type="submit" name="signup" class="btn btn-primary btn-block mb-4 m-2">Sign up</button>

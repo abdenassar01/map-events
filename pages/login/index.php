@@ -11,11 +11,23 @@
 </head>
 <body>
 <?php
-    if (isset($_POST['signin'])){
-        // TODO: get user from database and handle security
-        session_start();
-        $_SESSION['login'] = $_POST['email'];
-        header("Location: ../../");
+    include "../../config/db.php";
+    session_start();
+    if (isset($_POST['login'])){
+        if (!empty($db)) {
+            $sql = "select * from user where username = :username and password = :password";
+            $statement = $db->prepare($sql);
+            $statement->bindParam(":username", $_POST['email']);
+            $statement->bindParam(":password", $_POST['password']);
+
+            if($statement->execute()){
+                $user = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $_SESSION['login'] = $user[0]['name'].' '.$user[0]['lastname'];
+                header('Location: ../../');
+            }else{
+                echo "<div class='alert alert-danger' role='alert'>credentials are wrong</div>";
+            }
+        }
     }
 ?>
     <div class="d-flex mx-auto p-2 gap-10" style="justify-content: center; align-items: center; min-height: 100vh; flex-wrap: wrap">
@@ -23,12 +35,12 @@
         <form action="#" method="POST" style="min-width: 400px">
             <div class="form-outline mb-4">
                 <label class="form-label" for="email">Email address</label>
-                <input type="email" id="email" name="email" class="form-control" />
+                <input type="email" id="email" name="email" class="form-control" required />
             </div>
 
             <div class="form-outline mb-4">
                 <label class="form-label" for="password">Password</label>
-                <input type="password" id="password" name="password" class="form-control" />
+                <input type="password" id="password" name="password" class="form-control" required />
             </div>
 
             <div class="row mb-4" style="flex-direction: column">
@@ -43,7 +55,7 @@
                     <a href="../reset_password/">Forgot password?</a>
                 </div>
 
-                <button type="submit" name="signin" class="btn btn-primary btn-block mb-4 m-2">Sign in</button>
+                <button type="submit" name="login" class="btn btn-primary btn-block mb-4 m-2">Log in</button>
             </div>
             <div class="text-center">
                 <p>Not a member? <a href="../register">Register</a></p>

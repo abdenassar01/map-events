@@ -33,6 +33,11 @@ body{
     color: crimson;
 }
 
+.greeting{
+    padding: 10px;
+    margin-right: 10px;
+}
+
 .leaflet-popup-content-wrapper {
     border-radius: 2px;
     padding-top: 20px;
