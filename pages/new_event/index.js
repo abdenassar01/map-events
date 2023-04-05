@@ -9,11 +9,17 @@ let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
 }).addTo(map);
 
+let geocoder = L.Control.geocoder({
+    defaultMarkGeocode: false
+}).on('markgeocode', function(e) {
+        map.setView([e.geocode.center.lat, e.geocode.center.lng ], 10);
+    }).addTo(map);
+
 if (!navigator.geolocation) {
     console.log("Your browser doesn't support geolocation feature!");
 } else {
     navigator.geolocation.getCurrentPosition((position) => {
-        map.setView([position.coords.latitude, position.coords.longitude], 12);
+        map.setView([position.coords.latitude, position.coords.longitude], 10);
     })
 }
 
@@ -36,31 +42,31 @@ fetch("../../frontend/assets/data.json")
     })
     .catch(err => console.log(err))
 
-function getColor(d) {
-    return d > 500 ? '#800026' :
-        d > 100  ? '#BD0026' :
-            d > 50  ? '#E31A1C' :
-                d > 20  ? '#FC4E2A' :
-                    d > 10   ? '#FD8D3C' :
-                        d > 5   ? '#FEB24C' :
-                            d > 0   ? '#FED976' :
-                                '#FFEDA0';
-}
+// function getColor(d) {
+//     return d > 500 ? '#800026' :
+//         d > 100  ? '#BD0026' :
+//             d > 50  ? '#E31A1C' :
+//                 d > 20  ? '#FC4E2A' :
+//                     d > 10   ? '#FD8D3C' :
+//                         d > 5   ? '#FEB24C' :
+//                             d > 0   ? '#FED976' :
+//                                 '#FFEDA0';
+// }
 
-function style(feature) {
-    return {
-        fillColor: getColor(feature.properties.nb_events),
-        weight: 2,
-        opacity: 1,
-        color: 'white',
-        dashArray: '3',
-        fillOpacity: 0.7
-    }
-}
+// function style(feature) {
+//     return {
+//         fillColor: getColor(feature.properties.nb_events),
+//         weight: 2,
+//         opacity: 1,
+//         color: 'white',
+//         dashArray: '3',
+//         fillOpacity: 0.7
+//     }
+// }
 let markers = [];
 
 let geoJson = L.geoJson(null, {
-    style: style,
+    // style: style,
     onEachFeature: function(feature,layer){
         layer.on('click', function(evt) {
             markers.forEach(marker => map.removeLayer(marker));
