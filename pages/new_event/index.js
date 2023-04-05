@@ -13,11 +13,7 @@ if (!navigator.geolocation) {
     console.log("Your browser doesn't support geolocation feature!");
 } else {
     navigator.geolocation.getCurrentPosition((position) => {
-        const currentLocation = L.marker([position.coords.latitude, position.coords.longitude])
-                                    .addTo(map);
-        longitudeInput.value = position.coords.longitude;
-        latitudeInput.value = position.coords.latitude;
-        markers.push(currentLocation);
+        map.setView([position.coords.latitude, position.coords.longitude], 12);
     })
 }
 
