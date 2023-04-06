@@ -15,8 +15,12 @@
     include_once("../../config/db.php")
 ?>
     <div class="container-fluid py-4" >
-        <h2>Welcome <span style="color: #2450ff"><?=$_SESSION['login']?></span></h2>
+        <div class="d-flex p-2 justify-content-between">
+            <h2>Welcome <span style="color: #2450ff"><?=$_SESSION['login']?></span></h2>
+            <a href="../../" class="btn btn-primary">Home</a>
+        </div>
         <p class="pt-2">This is the list of event awaiting your approval</p>
+        <a href="../new_event/" class="btn btn-success my-2">New Event</a>
         <table class="table align-items-center mb-0" style="border: 1px solid #F2F2F2">
             <thead>
             <tr>
@@ -41,7 +45,7 @@
                             <tr>
                                 <th scope="row" class="text-xs font-weight-bold mb-0"><?=$value['id']?></th>
                                 <td>
-                                    <img style="border-radius: 50px" width="40" height="40" src="../../api/image/<?=$value['image']?>" alt="<?=$value['title']?>">
+                                    <img style="border-radius: 50px; object-fit: cover;" width="40" height="40" src="../../api/image/<?=$value['image']?>" alt="<?=$value['title']?>">
                                     <?=$value['title']?>
                                 </td>
                                 <td>
