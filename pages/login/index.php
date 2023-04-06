@@ -23,7 +23,11 @@
             if($statement->execute()){
                 $user = $statement->fetchAll(PDO::FETCH_ASSOC);
                 $_SESSION['login'] = $user[0]['name'].' '.$user[0]['lastname'];
-                header('Location: ../../');
+                if($user[0]['role'] === "ADMIN"){
+                    header('Location: ../../pages/dashboard');
+                }else{
+                    header('Location: ../../');
+                }
             }else{
                 echo "<div class='alert alert-danger' role='alert'>credentials are wrong</div>";
             }
