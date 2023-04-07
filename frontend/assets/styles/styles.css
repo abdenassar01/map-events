@@ -30,7 +30,7 @@ body{
 }
 
 .title{
-    color: crimson;
+    /*color: crimson;*/
 }
 
 .greeting{
@@ -47,4 +47,8 @@ body{
 .leaflet-popup-content-wrapper .leaflet-popup-content {
     border-radius: 2px;
     margin: 0;
+}
+
+.date{
+    color: crimson;
 }

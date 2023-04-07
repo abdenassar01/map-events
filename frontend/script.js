@@ -79,15 +79,17 @@ function zoomToFeature(e) {
         .then(events => {
             events.map(event => {
                 if (event.status === "approved"){
+                    const dateParts = event.end_time.split("-");
+                    const endTime = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2));
                     const marker = L.marker([event.lat, event.lng], {
                         icon: L.icon({
                             iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB" }.png`,
-                            iconSize: [30, 30],
+                            iconSize: [35, 35],
                             iconAnchor: [22, 94],
                             popupAnchor: [-3, -76],
                         })
                     }).addTo(map)
-                        .bindPopup("<div style='position: relative; width: 400px; padding-bottom: 50px; '><b class='title'><center>" + event.title + `</center></b><br><img style='border-radius: 2px; height: 100%' width='99%' src='./api/image/${ event.image }' alt='${ event.title }' /><div style='padding: 10px'>${ event.description }</div><a class='btn btn-dark' style='position: absolute; bottom: 10px; right: 10px; color: white' href='./pages/event_details/?id=${ event.id }'>see details</a></div>`);
+                        .bindPopup("<div style='position: relative; width: 400px; padding-bottom: 50px; '><b class='title'>" + event.title + `</b><br><div class='date'>Ends in: ${ endTime.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }</div><div style='padding: 10px'>${ event.description }</div><a class='btn btn-dark' style='position: absolute; bottom: 10px; right: 10px; color: white' href='./pages/event_details/?id=${ event.id }'>see details</a></div>`);
 
                     markers.push(marker)
                 }
