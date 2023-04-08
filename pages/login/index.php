@@ -13,6 +13,9 @@
 <?php
     include "../../config/db.php";
     session_start();
+    if(isset($_SESSION['login'])){
+        header("Location: ../../");
+    }
     if (isset($_POST['login'])){
         if (!empty($db)) {
             $sql = "select * from user where username = :username and password = :password";

@@ -28,6 +28,18 @@
     if(!isset($_SESSION['login'])){
         header("Location: ../login");
     }
+
+    $event = [];
+
+    if(isset($_GET['id']) && !empty($db)){
+        $req = "select * from event where id = :id;";
+        $st = $db->prepare($req);
+        $st->bindParam(":id", $_GET['id']);
+        if($st->execute()){
+            $event = $st->fetchAll(PDO::FETCH_ASSOC)[0];
+        }
+        print_r($event);
+    }
 ?>
 <body>
     <div class="container content-center mt-5" >
