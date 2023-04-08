@@ -32,7 +32,8 @@
             <tbody>
             <?php
             if (!empty($db)) {
-                $sql = "SELECT * FROM `event` WHERE status = 'unapproved';";
+                $condition = isset($_GET['status']) ? " WHERE status = '".$_GET['status']."' ;" : ";";
+                $sql = "SELECT * FROM `event` ".$condition;
 
                 $statement = $db->prepare($sql);
                 if ($statement->execute()){
@@ -49,8 +50,15 @@
                                     <?=$value['title']?>
                                 </td>
                                 <td>
-                                    <a href='approve.php?id=<?=$value['id']?>' class='btn btn-primary'>Approve</a>
+                                    <a href='../new_event/?id=<?=$value['id']?>' class='btn btn-success' >update</a>
                                     <a href='delete.php?id=<?=$value['id']?>' class='btn btn-danger' onclick='return confirm("Are you sure you want to delete this event?")'>Delete</a>
+                                    <?php
+                                    if($value['status'] === 'unapproved'){
+                                        ?>
+                                        <a href='approve.php?id=<?=$value['id']?>' class='btn btn-primary'>Approve</a>
+                                        <?php
+                                    }
+                                    ?>
                                 </td>
                             </tr>
                         <?php

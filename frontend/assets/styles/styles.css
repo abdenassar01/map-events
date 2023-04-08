@@ -30,7 +30,48 @@ body{
 }
 
 .title{
-    /*color: crimson;*/
+    font-size: 18px;
+
+}
+
+.event-card{
+    width: 400px;
+    padding: 10px 10px 10px;
+}
+
+.card-footer{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.event-details-btn {
+    text-decoration: none;
+    background: #5E5DF0;
+    border-radius: 999px;
+    box-shadow: #5E5DF0 0 10px 20px -10px;
+    box-sizing: border-box;
+    color: #FFFFFF;
+    cursor: pointer;
+    font-family: Inter,Helvetica,"Apple Color Emoji","Segoe UI Emoji",NotoColorEmoji,"Noto Color Emoji","Segoe UI Symbol","Android Emoji",EmojiSymbols,-apple-system,system-ui,"Segoe UI",Roboto,"Helvetica Neue","Noto Sans",sans-serif;
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 24px;
+    opacity: 1;
+    outline: 0 solid transparent;
+    padding: 8px 18px;
+    user-select: none;
+    -webkit-user-select: none;
+    touch-action: manipulation;
+    width: fit-content;
+    word-break: break-word;
+    border: 0;
+    transition: all .3s ease-in-out;
+}
+
+.event-details-btn:hover{
+    transform: translateY(-5px);
+    background: #2422f5;
 }
 
 .greeting{
@@ -39,7 +80,7 @@ body{
 }
 
 .leaflet-popup-content-wrapper {
-    border-radius: 2px;
+    border-radius: 10px;
     padding-top: 20px;
     width: 400px;
 }
@@ -51,4 +92,5 @@ body{
 
 .date{
     color: crimson;
+    font-weight: bold;
 }

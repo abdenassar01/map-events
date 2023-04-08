@@ -89,7 +89,7 @@ function zoomToFeature(e) {
                             popupAnchor: [-3, -76],
                         })
                     }).addTo(map)
-                        .bindPopup("<div style='position: relative; width: 400px; padding-bottom: 50px; '><b class='title'>" + event.title + `</b><br><div class='date'>Ends in: ${ endTime.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }</div><div style='padding: 10px'>${ event.description }</div><a class='btn btn-dark' style='position: absolute; bottom: 10px; right: 10px; color: white' href='./pages/event_details/?id=${ event.id }'>see details</a></div>`);
+                        .bindPopup("<div class='event-card'><p class='title'>" + event.title + `</p><br><div class='card-footer'><div class='date'>Ends in: ${ endTime.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }</div><a style='color: white' class='event-details-btn' href='./pages/event_details/?id=${ event.id }'>see details</a></div></div>`);
 
                     markers.push(marker)
                 }
