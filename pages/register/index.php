@@ -26,7 +26,9 @@ if (isset($_POST['signup'])){
         $statement->bindParam(":lastname", $_POST['lastname']);
 
         if($statement->execute()){
+            $user = $statement->fetchAll(PDO::FETCH_ASSOC);
             $_SESSION['login'] = $_POST['firstname'].' '.$_POST['lastname'];
+            $_SESSION['user_id'] = $user[0]['id'];
             header('Location: ../../');
         }else{
             echo "<div class='alert alert-danger' role='alert'>error registering new user</div>";
