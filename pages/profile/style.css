@@ -1,0 +1,155 @@
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container{
+    padding: 50px;
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+.card{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 35%;
+    gap: 20px;
+    position: relative;
+    max-height: 300px;
+}
+
+.events-list{
+    min-width: 62%;
+}
+
+.text{
+    text-align: center;
+}
+
+.border{
+    border: 1px solid #E7EBEB;
+    border-radius: 10px;
+    padding: 10px 20px;
+}
+
+.avatar{
+    width: 80px;
+    height: 80px;
+    object-fit: contain;
+    border-radius: 50px;
+}
+
+.role{
+    border-radius: 5px;
+    color: white;
+    padding: 7px 30px;
+    background-color: #1c48f8;
+}
+
+.logout{
+    border-radius: 5px;
+    font-weight: 700;
+    color: #e3e3e3;
+    text-decoration: none;
+    padding: 7px 30px;
+    background: rgb(255,105,123);
+    background: linear-gradient(90deg, rgba(255,105,123,1) 35%, rgba(215,0,26,1) 100%);
+
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    -moz-transition: all .3s ease-in-out;
+    -webkit-transition: all .3s ease-in-out;
+    -ms-transition: all .3s ease-in-out;
+    -o-transition: all .3s ease-in-out;
+    transition:all .3s ease-in-out;
+}
+
+.logout:hover{
+    cursor: pointer;
+    color: white;
+    background: rgb(255,105,123);
+    background: linear-gradient(90deg, rgba(255,105,123,1) 2%, rgba(215,0,26,1) 43%);
+}
+
+.alert{
+    padding: 10px;
+    font-size: 18px;
+    border-radius: 10px;
+    color: white;
+}
+
+.alert-info{
+    background-color: #718dff;
+}
+.alert-danger{
+    background-color: #ff5381;
+}
+
+table{
+    width: 100%;
+}
+
+tr{
+    border-bottom: 1px solid #E7EBEB;
+    padding: 5px 0;
+}
+
+tr, td, th, .event-info{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 5px;
+}
+
+.btn {
+   background-color: initial;
+   border-radius: 6px;
+   box-shadow: rgba(0, 0, 0, 0.1) 0 2px 4px;
+   color: #FFFFFF;
+   cursor: pointer;
+   display: inline-block;
+   font-family: Inter,-apple-system,system-ui,Roboto,"Helvetica Neue",Arial,sans-serif;
+   height: 40px;
+   line-height: 40px;
+   outline: 0;
+    text-decoration: none;
+   overflow: hidden;
+   padding: 0 20px;
+   pointer-events: auto;
+   position: relative;
+   text-align: center;
+   touch-action: manipulation;
+   user-select: none;
+   -webkit-user-select: none;
+   vertical-align: top;
+   white-space: nowrap;
+   width: 100%;
+   z-index: 9;
+   border: 0;
+   transition: box-shadow .2s;
+}
+
+.update:hover {
+    box-shadow:  #1c48f8 0 3px 8px;
+}
+
+.delete:hover{
+    color: white;
+    background-color: #fc2525;
+}
+
+.update{
+    background-color: #1c48f8;
+}
+
+.delete{
+    color: #fc2525;
+    box-shadow: none;
+}

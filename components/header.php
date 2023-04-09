@@ -7,7 +7,7 @@
             <?php
                 session_start();
                 if (isset($_SESSION['login'])){
-                    echo "<a href='./pages/profile' class='greeting'>Welcome ".$_SESSION['login']."</a>";
+                    echo "<a href='./pages/profile' class='greeting'>".$_SESSION['login']."</a>";
                 }else{
             ?>
                 <a href="./pages/login" class="link text-center m-2"><i class="fa fa-user" aria-hidden="true"></i> login</a>
