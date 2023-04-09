@@ -8,11 +8,11 @@ let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 let markers = [];
 
 function getColor(d) {
-    return d > 500 ? '#800026' :
-        d > 100  ? '#BD0026' :
-            d > 50  ? '#E31A1C' :
-                d > 20  ? '#FC4E2A' :
-                    d > 10   ? '#FD8D3C' :
+    return d > 30 ? '#800026' :
+        d > 20  ? '#BD0026' :
+            d > 15  ? '#E31A1C' :
+                d > 10  ? '#FC4E2A' :
+                    d > 7   ? '#FD8D3C' :
                         d > 5   ? '#FEB24C' :
                             d > 0   ? '#FED976' :
                                 '#FFEDA0';
@@ -112,7 +112,7 @@ let legend = L.control({position: 'bottomright'});
 legend.onAdd = function (map) {
 
     let div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 10, 20, 50, 100, 200, 500, 1000];
+        grades = [0, 5, 7, 10, 15, 20, 30];
 
     let items = "";
     for (let i = 0; i < grades.length; i++) {

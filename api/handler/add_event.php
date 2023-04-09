@@ -1,6 +1,7 @@
 <?php
+    session_start();
     $poster = "";
-    $user = 1;
+    $user = $_SESSION['user_id'];
 
     if($_FILES["poster"]){
         $filename = $_FILES["poster"]["name"];

@@ -10,7 +10,7 @@
     display: flex;
     justify-content: space-between;
     gap: 10px;
-    flex-wrap: wrap;
+    /*flex-wrap: wrap;*/
 }
 
 .card{
@@ -25,7 +25,8 @@
 }
 
 .events-list{
-    min-width: 62%;
+    min-width: 63%;
+    object-fit: contain;
 }
 
 .text{

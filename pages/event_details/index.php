@@ -97,7 +97,7 @@ if(isset($_GET['id']) && !empty($db)){
         integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM="
         crossorigin=""></script>
 <script>
-    const map = L.map('map').setView([5.694, 12.742], 7);
+    const map = L.map('map').setView([5.694, 12.742], 5);
 
     const lat = document.getElementById("lat").value;
     const lng = document.getElementById("lng").value;
