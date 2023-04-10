@@ -21,9 +21,8 @@
             $sql = "select * from user where username = :username";
             $statement = $db->prepare($sql);
             $statement->bindParam(":username", $_POST['email']);
-//            $statement->bindParam(":password", $_POST['password']);
 
-            if($statement->execute()){
+            if($statement->execute() and $statement->columnCount() > 1){
                 $user = $statement->fetchAll(PDO::FETCH_ASSOC)[0];
                 if(password_verify($_POST['password'], $user['password'])){
                     $_SESSION['login'] = $user['name'].' '.$user['lastname'];
