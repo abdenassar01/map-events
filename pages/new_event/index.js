@@ -3,6 +3,7 @@ let map = L.map('map').setView([5.694, 12.742], 7);
 let longitudeInput = document.getElementById("longitude");
 let latitudeInput = document.getElementById("latitude");
 let department = document.getElementById("department");
+let markers = [];
 
 let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
     maxZoom: 19,
@@ -23,6 +24,14 @@ if (!navigator.geolocation) {
     })
 }
 
+document.addEventListener('DOMContentLoaded', () => {
+    if((longitudeInput.value !== "") && (latitudeInput.value !== "")){
+        map.setView([latitudeInput.value, longitudeInput.value], 10);
+        let marker = L.marker([latitudeInput.value, longitudeInput.value]).addTo(map);
+        markers.push(marker);
+    }
+})
+
 fetch("../../frontend/assets/data.json")
     .then(data => data.json())
     .then(res => {
@@ -41,8 +50,6 @@ fetch("../../frontend/assets/data.json")
         })
     })
     .catch(err => console.log(err))
-
-let markers = [];
 
 let geoJson = L.geoJson(null, {
     onEachFeature: function(feature,layer){
