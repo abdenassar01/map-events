@@ -25,6 +25,7 @@
 </head>
 <?php
     session_start();
+    include_once("../../config/db.php");
     if(!isset($_SESSION['login'])){
         header("Location: ../login");
     }
@@ -38,7 +39,6 @@
         if($st->execute()){
             $event = $st->fetchAll(PDO::FETCH_ASSOC)[0];
         }
-        print_r($event);
     }
 ?>
 <body>
@@ -49,7 +49,7 @@
         <form class="row g-2" method="post" enctype="multipart/form-data" action="../../api/handler/add_event.php">
             <div class="col-md-6">
                 <label class="form-label" for="title">Title:</label>
-                <input type="text" id="title" name="title" class="form-control" required />
+                <input type="text" id="title" name="title" class="form-control" value="<?=isset($event['title']) ? $event['title'] : '' ?>" required />
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="type">Type:</label>
@@ -62,25 +62,42 @@
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="start_date">Start Date:</label>
-                <input type="date" id="start_date" name="start_date" class="form-control" required />
+                <input type="date" id="start_date" name="start_date" class="form-control" required value="<?php
+                if (isset($event['start_time'])) {
+                    $phpdate = strtotime( $event['start_time']);
+                    echo date( 'Y-m-d', $phpdate );
+                }
+                ?>" />
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="end_date">End Date:</label>
-                <input type="date" id="end_date" name="end_date" class="form-control" required />
+                <input type="date" id="end_date" name="end_date" class="form-control" required value="<?php
+                if (isset($event['end_time'])) {
+                    $phpdate = strtotime( $event['end_time']);
+                    echo date( 'Y-m-d', $phpdate );
+                }
+                ?>" />
             </div>
             <div class="form-outline mb-4">
                 <label class="form-label" for="poster">Poster:</label>
-                <input type="file" accept="image/png, image/jpeg" id="poster" name="poster" class="form-control"  required />
+                <input type="file" accept="image/png, image/jpeg" id="poster" name="poster" class="form-control"  />
+                <?php
+                    if (isset($event['image'])){
+                        echo "<img class='event-image' src='../../api/image/".$event['image']."' />";
+                    }
+                ?>
             </div>
             <div class="form-outline mb-4 mt-5">
                 <label class="form-label" for="description">Description:</label>
-                <div data-tiny-editor data-bold="no"></div>
+                <div data-tiny-editor data-bold="no">
+                    <?=isset($event['description']) ? $event['description'] : '' ?>
+                </div>
             </div>
-            <input type="hidden" name="longitude" id="longitude" />
-            <input type="hidden" name="latitude" id="latitude" />
-            <input type="hidden" name="department" id="department" />
-            <input type="hidden" name="description" id="description" />
-            <input type="submit" name="addEvent" class="btn btn-primary btn-block mb-4 m-2" value="add event">
+            <input type="hidden" name="longitude" id="longitude" value="<?=isset($event['lng']) ? $event['lng'] : '' ?>" />
+            <input type="hidden" name="latitude" id="latitude" value="<?=isset($event['lat']) ? $event['lat'] : '' ?>" />
+            <input type="hidden" name="department" id="department" value="<?=isset($event['departement_id']) ? $event['departement_id'] : '' ?>" />
+            <input type="hidden" name="description" id="description" value="<?=isset($event['description']) ? $event['description'] : '' ?>" />
+            <input type="submit" name="submit" class="btn btn-primary btn-block mb-4 m-2" value="<?=isset($_GET['id']) ? "update" : "add"?> event">
         </form>
     </div>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js"
