@@ -17,21 +17,31 @@ session_start();
 
 if (isset($_POST['signup'])){
     if (!empty($db)) {
-        $sql = "insert into user (username, password, role, name, lastname) values (:username, :password, 'USER', :firstname, :lastname);";
 
-        $statement = $db->prepare($sql);
-        $statement->bindParam(":username", $_POST['username']);
-        $statement->bindParam(":password", $_POST['password']);
-        $statement->bindParam(":firstname", $_POST['firstname']);
-        $statement->bindParam(":lastname", $_POST['lastname']);
-
-        if($statement->execute()){
-            $user = $statement->fetchAll(PDO::FETCH_ASSOC);
-            $_SESSION['login'] = $_POST['firstname'].' '.$_POST['lastname'];
-            $_SESSION['user_id'] = $user[0]['id'];
-            header('Location: ../../');
+        $username_verification_stmt = $db->prepare("Select id from user where username = :username");
+        $username_verification_stmt->bindParam(":username", $_POST['username']);
+        $username_verification_stmt->execute();
+        if($username_verification_stmt->columnCount() > 0){
+            echo "<div class='alert alert-danger' role='alert'>username already exist</div>";
         }else{
-            echo "<div class='alert alert-danger' role='alert'>error registering new user</div>";
+            $sql = "insert into user (username, password, role, name, lastname) values (:username, :password, 'USER', :firstname, :lastname);";
+
+            $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
+
+            $statement = $db->prepare($sql);
+            $statement->bindParam(":username", $_POST['username']);
+            $statement->bindParam(":password", $password_hash);
+            $statement->bindParam(":firstname", $_POST['firstname']);
+            $statement->bindParam(":lastname", $_POST['lastname']);
+
+            if($statement->execute()){
+                $user = $statement->fetchAll(PDO::FETCH_ASSOC);
+                $_SESSION['login'] = $_POST['firstname'].' '.$_POST['lastname'];
+                $_SESSION['user_id'] = $user[0]['id'];
+                header('Location: ../../');
+            }else{
+                echo "<div class='alert alert-danger' role='alert'>error registering new user</div>";
+            }
         }
     }
 }
