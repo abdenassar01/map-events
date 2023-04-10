@@ -27,7 +27,7 @@
                 $user = $statement->fetchAll(PDO::FETCH_ASSOC)[0];
                 if(password_verify($_POST['password'], $user['password'])){
                     $_SESSION['login'] = $user['name'].' '.$user['lastname'];
-                    $_SESSION['user_id'] = $user[0]['id'];
+                    $_SESSION['user_id'] = $user['id'];
                     if($user['role'] === "ADMIN"){
                         header('Location: ../../pages/dashboard');
                     }else{

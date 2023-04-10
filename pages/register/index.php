@@ -35,9 +35,13 @@ if (isset($_POST['signup'])){
             $statement->bindParam(":lastname", $_POST['lastname']);
 
             if($statement->execute()){
-                $user = $statement->fetchAll(PDO::FETCH_ASSOC);
-                $_SESSION['login'] = $_POST['firstname'].' '.$_POST['lastname'];
-                $_SESSION['user_id'] = $user[0]['id'];
+                $userstmt = $db->prepare("select * from user where username = :username");
+                $userstmt->bindParam(":username", $_POST['username']);
+                $userstmt->execute();
+                $user = $userstmt->fetchAll(PDO::FETCH_ASSOC)[0];
+                print_r($user);
+                $_SESSION['login'] = $user['name'].' '.$user['lastname'];
+                $_SESSION['user_id'] = $user['id'];
                 header('Location: ../../');
             }else{
                 echo "<div class='alert alert-danger' role='alert'>error registering new user</div>";

@@ -7,15 +7,15 @@
     }
 
     $user = [];
-if (!empty($db)) {
-    $sql = "select * from user where id = :id;";
-    $statement = $db->prepare($sql);
-    $statement->bindParam(":id", $_SESSION['user_id']);
+    if (!empty($db)) {
+        $sql = "select * from user where id = :id;";
+        $statement = $db->prepare($sql);
+        $statement->bindParam(":id", $_SESSION['user_id']);
 
-    if($statement->execute()){
-        $user = $statement->fetchAll(PDO::FETCH_ASSOC)[0];
+        if($statement->execute()){
+            $user = $statement->fetchAll(PDO::FETCH_ASSOC)[0];
+        }
     }
-}
 ?>
 <!doctype html>
 <html lang="en">
