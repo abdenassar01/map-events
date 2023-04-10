@@ -18,10 +18,10 @@ session_start();
 if (isset($_POST['signup'])){
     if (!empty($db)) {
 
-        $username_verification_stmt = $db->prepare("Select id from user where username = :username");
+        $username_verification_stmt = $db->prepare("Select count(*) as 'count' from user where username = :username");
         $username_verification_stmt->bindParam(":username", $_POST['username']);
         $username_verification_stmt->execute();
-        if($username_verification_stmt->columnCount() > 0){
+        if($username_verification_stmt->fetchAll(PDO::FETCH_ASSOC)[0]['count'] > 0){
             echo "<div class='alert alert-danger' role='alert'>username already exist</div>";
         }else{
             $sql = "insert into user (username, password, role, name, lastname) values (:username, :password, 'USER', :firstname, :lastname);";

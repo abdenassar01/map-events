@@ -18,22 +18,26 @@
     }
     if (isset($_POST['login'])){
         if (!empty($db)) {
-            $sql = "select * from user where username = :username and password = :password";
+            $sql = "select * from user where username = :username";
             $statement = $db->prepare($sql);
             $statement->bindParam(":username", $_POST['email']);
-            $statement->bindParam(":password", $_POST['password']);
+//            $statement->bindParam(":password", $_POST['password']);
 
             if($statement->execute()){
-                $user = $statement->fetchAll(PDO::FETCH_ASSOC);
-                $_SESSION['login'] = $user[0]['name'].' '.$user[0]['lastname'];
-                $_SESSION['user_id'] = $user[0]['id'];
-                if($user[0]['role'] === "ADMIN"){
-                    header('Location: ../../pages/dashboard');
+                $user = $statement->fetchAll(PDO::FETCH_ASSOC)[0];
+                if(password_verify($_POST['password'], $user['password'])){
+                    $_SESSION['login'] = $user['name'].' '.$user['lastname'];
+                    $_SESSION['user_id'] = $user[0]['id'];
+                    if($user['role'] === "ADMIN"){
+                        header('Location: ../../pages/dashboard');
+                    }else{
+                        header('Location: ../../');
+                    }
                 }else{
-                    header('Location: ../../');
+                    echo "<div class='alert alert-danger' role='alert'>password wrong make sure you own this account.</div>";
                 }
             }else{
-                echo "<div class='alert alert-danger' role='alert'>credentials are wrong</div>";
+                echo "<div class='alert alert-danger' role='alert'>there is no user with the specified username.</div>";
             }
         }
     }
