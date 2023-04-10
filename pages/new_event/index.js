@@ -32,6 +32,22 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })
 
+const poster = document.querySelector('#poster');
+
+poster.addEventListener('change', (e) => {
+    const preview = document.querySelector('.event-image');
+    const file = poster.files[0];
+    const reader = new FileReader();
+
+    reader.addEventListener("load", () => {
+        preview.src = reader.result;
+    }, false);
+
+    if (file) {
+        reader.readAsDataURL(file);
+    }
+}, false)
+
 fetch("../../frontend/assets/data.json")
     .then(data => data.json())
     .then(res => {

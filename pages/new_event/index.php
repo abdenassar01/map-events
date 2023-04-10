@@ -15,8 +15,9 @@
     <link rel="stylesheet" href="https://unpkg.com/leaflet-control-geocoder/dist/Control.Geocoder.css" />
     <style>
         #map{
-            max-height: 100px;
-            width: 82vw;
+            border-radius: 10px;
+            height: 20px;
+            width: 100%;
         }
     </style>
 
@@ -47,6 +48,11 @@
         <div id="map" ></div>
         <br />
         <form class="row g-2" method="post" enctype="multipart/form-data" action="../../api/handler/add_event.php">
+            <?php
+                if(isset($_GET['id'])){
+                    echo "<input type='hidden' value='".$_GET['id']."' />";
+                }
+            ?>
             <div class="col-md-6">
                 <label class="form-label" for="title">Title:</label>
                 <input type="text" id="title" name="title" class="form-control" value="<?=isset($event['title']) ? $event['title'] : '' ?>" required />
@@ -54,28 +60,28 @@
             <div class="col-md-6">
                 <label class="form-label" for="type">Type:</label>
                 <select class="form-select" name="type" aria-label="event type" required>
-                    <option value="liberation">Événement historique lies à la lutte de libération nationale</option>
-                    <option value="compagne">Événement lies à notre compagne politique actuelle</option>
-                    <option value="culture">Événement culturels actuels</option>
-                    <option value="autre">Événement des autres acteurs société civile</option>
+                    <option value="liberation"<?=($event['type'] === 'liberation') ? 'selected' : '' ?>>Événement historique lies à la lutte de libération nationale</option>
+                    <option value="compagne"<?=($event['type'] === 'compagne') ? 'selected' : '' ?>>Événement lies à notre compagne politique actuelle</option>
+                    <option value="culture"<?=($event['type'] === 'culture') ? 'selected' : '' ?>>Événement culturels actuels</option>
+                    <option value="autre"<?=($event['type'] === 'autre') ? 'selected' : '' ?>>Événement des autres acteurs société civile</option>
                 </select>
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="start_date">Start Date:</label>
                 <input type="date" id="start_date" name="start_date" class="form-control" required value="<?php
-                if (isset($event['start_time'])) {
-                    $phpdate = strtotime( $event['start_time']);
-                    echo date( 'Y-m-d', $phpdate );
-                }
+                    if (isset($event['start_time'])) {
+                        $phpdate = strtotime( $event['start_time']);
+                        echo date( 'Y-m-d', $phpdate );
+                    }
                 ?>" />
             </div>
             <div class="col-md-6">
                 <label class="form-label" for="end_date">End Date:</label>
                 <input type="date" id="end_date" name="end_date" class="form-control" required value="<?php
-                if (isset($event['end_time'])) {
-                    $phpdate = strtotime( $event['end_time']);
-                    echo date( 'Y-m-d', $phpdate );
-                }
+                    if (isset($event['end_time'])) {
+                        $phpdate = strtotime( $event['end_time']);
+                        echo date( 'Y-m-d', $phpdate );
+                    }
                 ?>" />
             </div>
             <div class="form-outline mb-4">
