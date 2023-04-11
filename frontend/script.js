@@ -6,15 +6,16 @@ let tiles = L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 }).addTo(map);
 
 let markers = [];
+grades = [];
 
 function getColor(d) {
-    return d > 30 ? '#800026' :
-        d > 20  ? '#BD0026' :
-            d > 15  ? '#E31A1C' :
-                d > 10  ? '#FC4E2A' :
-                    d > 7   ? '#FD8D3C' :
-                        d > 5   ? '#FEB24C' :
-                            d > 0   ? '#FED976' :
+    return d > grades[6] ? '#800026' :
+        d > grades[5]  ? '#BD0026' :
+            d > grades[4]  ? '#E31A1C' :
+                d > grades[3]  ? '#FC4E2A' :
+                    d > grades[2]   ? '#FD8D3C' :
+                        d > grades[1]   ? '#FEB24C' :
+                            d > grades[0]   ? '#FED976' :
                                 '#FFEDA0';
 }
 
@@ -107,23 +108,35 @@ function onEachFeature(feature, layer) {
     });
 }
 
-let legend = L.control({position: 'bottomright'});
+document.addEventListener("DOMContentLoaded", () => {
+    fetch("api/events/count/all/")
+        .then(res => res.json())
+        .then(eventsCounts => {
+            const key = document.querySelector('.key');
+            let html = "";
 
-legend.onAdd = function (map) {
-
-    let div = L.DomUtil.create('div', 'info legend'),
-        grades = [0, 5, 7, 10, 15, 20, 30];
-
-    let items = "";
-    for (let i = 0; i < grades.length; i++) {
-        items +=
-            '<div><i class="fa-solid fa-square" style="width: 35px; height: 35px; background:' + getColor(grades[i] + 1) + '"></i> ' +
-            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '</div>' : '+');
-    }
-
-    div.innerHTML = "<div style='display: flex; flex-direction: column; justify-content: center; align-items: center; padding: 5px; border-radius: 5px; background-color: white; min-height: 150px; min-width: 100px'><div>" + items + "</div></div>"
-
-    return div;
-};
-
-legend.addTo(map);
+            let min = 0;
+            let max = 0;
+            let diff = 0;
+            eventsCounts.map(item => {
+                if (item.nbr_events <= min){
+                    min = item.nbr_events;
+                }
+                if (item.nbr_events >= max){
+                    max = item.nbr_events;
+                }
+            })
+            diff = Math.ceil(max / 7);
+            for (let i = 0; i < 7; i++) {
+                if (i === 0 ) {
+                    grades[i] = min;
+                }else if ( i === grades.length - 1 ){
+                    grades[grades.length - 1] = max;
+                }else {
+                    grades[i] = grades[i - 1] + diff;
+                }
+                html +=  `<div class='key-item'><div class='square' style='background-color: ${getColor(grades[i])}'></div>${ grades[ i ] + (i === 6 ? " + " : " &ndash; " + (grades[i] + diff)) }</div>`;
+            }
+            key.innerHTML = html;
+    })
+})
