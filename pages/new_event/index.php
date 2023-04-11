@@ -50,7 +50,7 @@
         <form class="row g-2" method="post" enctype="multipart/form-data" action="../../api/handler/add_event.php">
             <?php
                 if(isset($_GET['id'])){
-                    echo "<input type='hidden' value='".$_GET['id']."' />";
+                    echo "<input type='hidden' name='id' value='".$_GET['id']."' />";
                 }
             ?>
             <div class="col-md-6">
@@ -96,7 +96,7 @@
             <div class="form-outline mb-4 mt-5">
                 <label class="form-label" for="description">Description:</label>
                 <div data-tiny-editor data-bold="no">
-                    <?=isset($event['description']) ? $event['description'] : '' ?>
+                    <?= isset($event['description']) ? $event['description'] : '' ?>
                 </div>
             </div>
             <input type="hidden" name="longitude" id="longitude" value="<?=isset($event['lng']) ? $event['lng'] : '' ?>" />
