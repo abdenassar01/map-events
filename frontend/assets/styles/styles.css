@@ -97,7 +97,34 @@ body{
 }
 
 .event-image{
-  border-radius: 10px;
+    border-radius: 10px;
     width: 100%;
     margin-top: 10px;
+}
+
+.key{
+    height: 200px;
+    width: 100px;
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    background-color: #ffffff;
+    z-index: 1000;
+    border-radius: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 5px;
+}
+
+.key-item{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.square{
+    width: 25px;
+    height: 25px;
+    border-radius: 2px;
 }
