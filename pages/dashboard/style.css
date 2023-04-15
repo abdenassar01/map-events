@@ -38,3 +38,13 @@
     background-color: white;
     color: #1c48f8;
 }
+
+.event-details-link{
+    color: black;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.event-details-link span:hover{
+    text-decoration: underline;
+}

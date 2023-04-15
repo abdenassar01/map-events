@@ -56,8 +56,10 @@
                             <tr>
                                 <th scope="row" class="text-xs font-weight-bold mb-0"><?=$value['id']?></th>
                                 <td>
-                                    <img style="border-radius: 50px; object-fit: cover;" width="40" height="40" src="../../api/image/<?=$value['image']?>" alt="<?=$value['title']?>">
-                                    <?=$value['title']?>
+                                    <a href="../event_details/?id=<?=$value['id']?>" class="event-details-link">
+                                        <img style="border-radius: 50px; object-fit: cover;" width="40" height="40" src="../../api/image/<?=$value['image']?>" alt="<?=$value['title']?>">
+                                        <span><?=$value['title']?></span>
+                                    </a>
                                 </td>
                                 <td>
                                     <a href='../new_event/?id=<?=$value['id']?>' class='btn btn-success' >update</a>
