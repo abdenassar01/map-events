@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="../../frontend/assets/icons/logo.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="./style.css">
     <title>Document</title>
 </head>
 <body>
@@ -23,6 +24,12 @@
             <a href="../../" class="btn btn-primary">Home</a>
         </div>
         <p class="pt-2">This is the list of event awaiting your approval</p>
+        <div class="buttons">
+            <div class="buttons-wrapper active">
+                <a href="./user/" class="button events-btn inactive">users management</a>
+                <a href="./" class="button users-btn" style="color: #fff;">events management</a>
+            </div>
+        </div>
         <a href="../new_event/" class="btn btn-success my-2">New Event</a>
         <table class="table align-items-center mb-0" style="border: 1px solid #F2F2F2">
             <thead>

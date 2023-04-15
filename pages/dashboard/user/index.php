@@ -7,6 +7,7 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link rel="icon" href="../../../frontend/assets/icons/logo.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    <link rel="stylesheet" href="../style.css">
     <title>Document</title>
 </head>
 <body>
@@ -23,7 +24,12 @@ include_once("../../../config/db.php")
         <a href="../../" class="btn btn-primary">Home</a>
     </div>
     <p class="pt-2">user accounts management</p>
-<!--    <a href="../add_user/" class="btn btn-success my-2">New User</a>-->
+    <div class="buttons">
+        <div class="buttons-wrapper">
+            <a href="./" class="active events-btn button">users management</a>
+            <a href="../" class="users-btn button">events management</a>
+        </div>
+    </div>
     <table class="table align-items-center mb-0" style="border: 1px solid #F2F2F2">
         <thead>
         <tr>
@@ -51,13 +57,12 @@ include_once("../../../config/db.php")
                         <td>
                             <?=$value['name'].' '.$value['lastname']?>
                         </td>
-                        <td>
+                        <td style="color: <?=$value['role'] === 'ADMIN' ? 'red' : 'blue'?>">
                             <?=$value['role']?>
                         </td>
                         <td>
                             <a href='update.php?id=<?=$value['id']?>' class='btn btn-success' >update</a>
-                            <a href='delete.php?id=<?=$value['id']?>' class='btn btn-danger' onclick='return confirm("Are you sure you want to delete this event?")'>Delete</a>
-
+                            <a href='delete.php?id=<?=$value['id']?>' class='btn btn-danger' onclick='return confirm("Are you sure you want to delete this user?")'>Delete</a>
                         </td>
                     </tr>
                     <?php
