@@ -17,7 +17,6 @@ session_start();
 
 if (isset($_POST['signup'])){
     if (!empty($db)) {
-
         $username_verification_stmt = $db->prepare("Select count(*) as 'count' from user where username = :username");
         $username_verification_stmt->bindParam(":username", $_POST['username']);
         $username_verification_stmt->execute();
@@ -33,18 +32,20 @@ if (isset($_POST['signup'])){
             $statement->bindParam(":password", $password_hash);
             $statement->bindParam(":firstname", $_POST['firstname']);
             $statement->bindParam(":lastname", $_POST['lastname']);
-
-            if($statement->execute()){
-                $userstmt = $db->prepare("select * from user where username = :username");
-                $userstmt->bindParam(":username", $_POST['username']);
-                $userstmt->execute();
-                $user = $userstmt->fetchAll(PDO::FETCH_ASSOC)[0];
-                print_r($user);
-                $_SESSION['login'] = $user['name'].' '.$user['lastname'];
-                $_SESSION['user_id'] = $user['id'];
-                header('Location: ../../');
-            }else{
-                echo "<div class='alert alert-danger' role='alert'>error registering new user</div>";
+            try{
+                if($statement->execute()){
+                    $userstmt = $db->prepare("select * from user where username = :username");
+                    $userstmt->bindParam(":username", $_POST['username']);
+                    $userstmt->execute();
+                    $user = $userstmt->fetchAll(PDO::FETCH_ASSOC)[0];
+                    print_r($user);
+                    $_SESSION['login'] = $user['name'].' '.$user['lastname'];
+                    $_SESSION['user_id'] = $user['id'];
+                    header('Location: ../../');
+                }
+            }catch (Exception $ex){
+                print_r($ex);
+                echo "<div class='alert alert-danger' role='alert'>error registering new user".$statement->errorInfo()[2]."</div>";
             }
         }
     }
@@ -57,7 +58,6 @@ if (isset($_POST['signup'])){
             <label class="form-label" for="firstname">Name: </label>
             <input type="text" id="firstname" name="firstname" class="form-control" required />
         </div>
-
         <div class="form-outline mb-4">
             <label class="form-label" for="lastname">Lastname: </label>
             <input type="text" id="lastname" name="lastname" class="form-control" required />

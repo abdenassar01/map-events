@@ -3,7 +3,7 @@ const DB_HOST = "localhost";
 
     const DB_USER = "root";
 
-    const DB_PASS = "27701";
+    const DB_PASS = "Abde@2001";
 
     const DB_NAME = "map_events";
 

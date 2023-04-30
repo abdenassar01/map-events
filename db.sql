@@ -12,7 +12,7 @@ create table if not exists user
     username varchar(100) null,
     password varchar(100) null,
     role     varchar(10)  null
-    );
+);
 
 create table if not exists event
 (
