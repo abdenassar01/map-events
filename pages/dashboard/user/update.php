@@ -25,15 +25,17 @@ if (!empty($db)) {
 
 if (isset($_POST['update'])){
     if (!empty($db)) {
-        $username_verification_stmt = $db->prepare("Select count(*) as 'count' from user where username = :username");
-        $username_verification_stmt->bindParam(":username", $_POST['username']);
-        $username_verification_stmt->execute();
-        if($username_verification_stmt->fetchAll(PDO::FETCH_ASSOC)[0]['count'] > 0){
-            echo "<div class='alert alert-danger' role='alert'>username already exist</div>";
-        }else{
-            $sql = "insert into user (username, password, role, name, lastname) values (:username, :password, 'USER', :firstname, :lastname);";
+            $password = "";
 
-            $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
+            if(isset($_POST['password']) and isset($_POST['repassword'])){
+                $password_hash = "";
+                if($_POST['password'] === $_POST['repassword']){
+                    $password_hash = password_hash($_POST['password'], PASSWORD_BCRYPT);
+                    $password = "`password` = :password,";
+                }
+            }
+
+            $sql = "UPDATE `user` SET ".$password." `name` = :firstname, `lastname` = :lastname, `username` = :username WHERE `user`.`id` = 1;";
 
             $statement = $db->prepare($sql);
             $statement->bindParam(":username", $_POST['username']);
@@ -42,13 +44,6 @@ if (isset($_POST['update'])){
             $statement->bindParam(":lastname", $_POST['lastname']);
             try{
                 if($statement->execute()){
-                    $userstmt = $db->prepare("select * from user where username = :username");
-                    $userstmt->bindParam(":username", $_POST['username']);
-                    $userstmt->execute();
-                    $user = $userstmt->fetchAll(PDO::FETCH_ASSOC)[0];
-                    print_r($user);
-                    $_SESSION['login'] = $user['name'].' '.$user['lastname'];
-                    $_SESSION['user_id'] = $user['id'];
                     header('Location: ../../');
                 }
             }catch (Exception $ex){
@@ -56,7 +51,6 @@ if (isset($_POST['update'])){
                 echo "<div class='alert alert-danger' role='alert'>error registering new user".$statement->errorInfo()[2]."</div>";
             }
         }
-    }
 }
 ?>
 <div class="d-flex mx-auto p-2 gap-10" style="justify-content: center; align-items: center; min-height: 100vh; flex-wrap: wrap">
@@ -67,7 +61,7 @@ if (isset($_POST['update'])){
         <input type="text" id="firstname" value="<?=$user['name']?>" name="firstname" class="form-control" required />
         </div>
         <div class="form-outline mb-4">
-            <label class="form-label" for="lastname">Lastname: </label>
+            <label class="form-label" for="Taking you to the target site.lastname">Lastname: </label>
             <input type="text" id="lastname" value="<?=$user['lastname']?>" name="lastname" class="form-control" required />
         </div>
 
@@ -78,12 +72,12 @@ if (isset($_POST['update'])){
 
         <div class="form-outline mb-4">
             <label class="form-label" for="password">Password</label>
-            <input type="password" id="password" name="password" class="form-control" required />
+            <input type="password" id="password" name="password" class="form-control"  />
         </div>
 
         <div class="form-outline mb-4">
             <label class="form-label" for="repassword">Confirm password</label>
-            <input type="repassword" id="repassword" name="repassword" class="form-control" required />
+            <input type="password" id="repassword" name="repassword" class="form-control"  />
         </div>
 
         <button type="submit" name="update" class="btn btn-primary btn-block mb-4 m-2">update</button>
