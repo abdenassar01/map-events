@@ -12,6 +12,11 @@
             ?>
                 <a href="./pages/login" class="link text-center m-2"><i class="fa fa-user" aria-hidden="true"></i> login</a>
             <?php } ?>
+            <?php
+                if ($_SESSION['role'] === "ADMIN"){
+                    echo "<a style='margin-right: 10px' href='./pages/dashboard' class='dashboard-btn btn btn-dark'>dashboard</a>";
+                }
+            ?>
             <a href="./pages/new_event" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> add event</a>
         </div>
     </div>

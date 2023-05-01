@@ -27,6 +27,7 @@
                 if(password_verify($_POST['password'], $user['password'])){
                     $_SESSION['login'] = $user['name'].' '.$user['lastname'];
                     $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['role'] = $user['role'];
                     if($user['role'] === "ADMIN"){
                         header('Location: ../../pages/dashboard');
                     }else{

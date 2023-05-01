@@ -38,9 +38,9 @@ if (isset($_POST['signup'])){
                     $userstmt->bindParam(":username", $_POST['username']);
                     $userstmt->execute();
                     $user = $userstmt->fetchAll(PDO::FETCH_ASSOC)[0];
-                    print_r($user);
                     $_SESSION['login'] = $user['name'].' '.$user['lastname'];
                     $_SESSION['user_id'] = $user['id'];
+                    $_SESSION['role'] = $user['role'];
                     header('Location: ../../');
                 }
             }catch (Exception $ex){
