@@ -4,7 +4,6 @@
     $user = $_SESSION['user_id'];
 
     if($_FILES["poster"]){
-        print_r($_POST);
         $filename = $_FILES["poster"]["name"];
         $tempname = $_FILES["poster"]["tmp_name"];
         $folder = "../image/" . $filename;
@@ -17,8 +16,7 @@
     $sql = "";
 
     if(isset($_POST['id'])){
-        $img = $poster !== "" ? "`image` = :poster, " : "";
-        $sql = "UPDATE `event` SET `departement_id` = :department, `title` = :title, `description` = :description, `type` = :type, ".$img." `lng` = :lng, `lat` = :lat, `user_id` = :user, `start_time` = :start_date, `end_time` = :end_date WHERE id = :id;";
+        $sql = "UPDATE `event` SET `departement_id` = :department, `title` = :title, `description` = :description, `type` = :type, `image` = :poster, `lng` = :lng, `lat` = :lat, `user_id` = :user, `start_time` = :start_date, `end_time` = :end_date WHERE id = :id;";
     }else{
         $sql = "INSERT INTO `event` (`departement_id`, `title`, `description`, `type`, `image`, `lng`, `lat`, `user_id`, `start_time`, `end_time`) VALUES (:department, :title, :description, :type, :poster, :lng, :lat, :user, :start_date, :end_date);";
     }

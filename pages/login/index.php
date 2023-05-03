@@ -42,8 +42,8 @@
         }
     }
 ?>
-    <div class="d-flex mx-auto p-2 gap-10" style="justify-content: center; align-items: center; min-height: 100vh; flex-wrap: wrap">
-        <img src="../../frontend/assets/icons/map.svg" alt="" width="400px" height="auto">
+    <div class="d-flex mx-auto p-2 gap-10" style="justify-content: center; align-items: center; min-height: 100vh; flex-wrap: wrap; gap: 20px">
+        <img src="../../frontend/assets/image/register.svg" alt="" width="400px" height="auto">
         <form action="#" method="POST" style="min-width: 400px">
             <div class="form-outline mb-4">
                 <label class="form-label" for="email">Email address</label>
