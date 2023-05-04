@@ -85,8 +85,8 @@ function zoomToFeature(e) {
                     const marker = L.marker([event.lat, event.lng], {
                         icon: L.icon({
                             iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB" }.png`,
-                            iconSize: [35, 35],
-                            iconAnchor: [22, 94],
+                            iconSize: [36, 36],
+                            iconAnchor: [12, 36],
                             popupAnchor: [-3, -76],
                         })
                     }).addTo(map)
