@@ -18,7 +18,7 @@
     if(isset($_POST['id'])){
         $sql = "UPDATE `event` SET `departement_id` = :department, `title` = :title, `description` = :description, `type` = :type, `image` = :poster, `lng` = :lng, `lat` = :lat, `user_id` = :user, `start_time` = :start_date, `end_time` = :end_date WHERE id = :id;";
     }else{
-        $sql = "INSERT INTO `event` (`departement_id`, `title`, `description`, `type`, `image`, `lng`, `lat`, `user_id`, `start_time`, `end_time`) VALUES (:department, :title, :description, :type, :poster, :lng, :lat, :user, :start_date, :end_date);";
+        $sql = "INSERT INTO `event` (`departement_id`, `title`, `description`, `type`, `image`, `lng`, `lat`, `user_id`, `start_time`, `end_time`, `date_created`) VALUES (:department, :title, :description, :type, :poster, :lng, :lat, :user, :start_date, :end_date, CURDATE());";
     }
 
     include("../../config/db.php");
