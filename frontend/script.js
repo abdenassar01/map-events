@@ -63,7 +63,7 @@ fetch("frontend/assets/data.json")
                                 iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB" }.png`,
                                 iconSize: [36, 36],
                                 iconAnchor: [12, 36],
-                                popupAnchor: [-3, -76],
+                                popupAnchor: [5, 0],
                             })
                         }).addTo(map)
                             .bindPopup("<div class='event-card'><p class='title'>" + event.title + `</p><br><div class='card-footer'><div class='date'>Ends in: ${ endTime.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }</div><a style='color: white' class='event-details-btn' href='./pages/event_details/?id=${ event.id }'>see details</a></div></div>`);
@@ -108,7 +108,7 @@ function zoomToFeature(e) {
                             iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB" }.png`,
                             iconSize: [36, 36],
                             iconAnchor: [12, 36],
-                            popupAnchor: [-3, -76],
+                            popupAnchor: [5, 0],
                         })
                     }).addTo(map)
                         .bindPopup("<div class='event-card'><p class='title'>" + event.title + `</p><br><div class='card-footer'><div class='date'>Ends in: ${ endTime.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }</div><a style='color: white' class='event-details-btn' href='./pages/event_details/?id=${ event.id }'>see details</a></div></div>`);
