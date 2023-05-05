@@ -50,7 +50,7 @@ fetch("frontend/assets/data.json")
                         }
                     })
                 })
-        })
+        });
     })
     .catch(err => console.log(err))
 
