@@ -24,9 +24,33 @@ body{
     overflow-x: hidden;
 }
 
+.main{
+    display: flex;
+    max-height: 100vh;
+    /*overflow-y: hidden;*/
+}
+
 #map{
-    width: 100vw;
+    width: 80vw;
     min-height: 90vh;
+}
+
+.sidebar{
+    width: 20vw;
+    background-color: #F8F9FA;
+    overflow-x: scroll;
+}
+
+.sidebar-event-item{
+    padding: 10px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.sidebar-event-item:hover{
+    cursor: pointer;
+    background-color: #bedeff;
 }
 
 .title{

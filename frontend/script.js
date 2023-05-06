@@ -159,5 +159,41 @@ document.addEventListener("DOMContentLoaded", () => {
                 html +=  `<div class='key-item'><div class='square' style='background-color: ${getColor(grades[i])}'></div>${ grades[ i ] + (i === 6 ? " + " : " &ndash; " + (grades[i] + diff)) }</div>`;
             }
             key.innerHTML = html;
-    })
+        })
+
+    const sidebar = document.querySelector('.sidebar');
+    fetch("api/events/latest/")
+        .then(res => res.json())
+        .then(events => {
+            events.map(event => {
+                if (event.status === "approved"){
+                    sidebar.innerHTML += `<div onclick='focusEvent(${ event.id })' class='sidebar-event-item'>` + event.title +`<img src='https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB"}.png' alt='' /></div>`
+                }
+            })
+        })
 })
+
+function focusEvent(id){
+    markers.forEach(marker => map.removeLayer(marker));
+    fetch("api/events/?id=" + id)
+        .then(res => res.json())
+        .then(events => {
+            events.map(event => {
+                const dateParts = event.end_time.split("-");
+                const endTime = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2));
+                const marker = L.marker([event.lat, event.lng], {
+                    icon: L.icon({
+                        iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB" }.png`,
+                        iconSize: [36, 36],
+                        iconAnchor: [12, 36],
+                        popupAnchor: [5, 0],
+                    })
+                }).addTo(map)
+                    .bindPopup("<div class='event-card'><p class='title'>" + event.title + `</p><br><div class='card-footer'><div class='date'>Ends in: ${ endTime.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }</div><a style='color: white' class='event-details-btn' href='./pages/event_details/?id=${ event.id }'>see details</a></div></div>`);
+
+                map.setView([event.lat, event.lng], 10);
+                markers.push(marker)
+            })
+        })
+        .catch(err => console.log(err))
+}

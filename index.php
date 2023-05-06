@@ -14,9 +14,14 @@
         <?php
             include('./components/header.php')
         ?>
-        <div id="map"></div>
-        <div class="key"></div>
+        <div class="main">
+            <?php
+                include('./components/sidebar.php')
+            ?>
+            <div id="map"></div>
+        </div>
     </div>
+    <div class="key"></div>
 </body>
     <script src="https://unpkg.com/leaflet@1.9.3/dist/leaflet.js" integrity="sha256-WBkoXOwTeyKclOHuWtc+i2uENFpDZ9YPdf5Hf+D7ewM=" crossorigin=""></script>
     <script src="frontend/script.js"></script>
