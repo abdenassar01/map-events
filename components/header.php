@@ -3,7 +3,7 @@
         <a class="navbar-brand" href="../index.php">
             <img src="https://i.imgur.com/jUBeM4g.png" alt="logo cameroon events" width="100" height="auto">
         </a>
-        <div class="d-flex">
+        <div class="d-flex align-items-center">
             <?php
                 session_start();
                 if (isset($_SESSION['login'])){
@@ -17,7 +17,7 @@
                     echo "<a style='margin-right: 10px' href='./pages/dashboard' class='dashboard-btn btn btn-dark'>dashboard</a>";
                 }
             ?>
-            <a href="./pages/new_event" class="btn btn-primary"><i class="fa fa-plus-circle" aria-hidden="true"></i> add event</a>
+            <a href="./pages/new_event" class="btn btn-primary" style="min-width: 120px"><i class="fa fa-plus-circle" aria-hidden="true"></i> add event</a>
         </div>
     </div>
 </div>

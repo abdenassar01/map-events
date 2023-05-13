@@ -19,7 +19,7 @@
     include_once("../../config/db.php")
 ?>
     <div class="container-fluid py-4" >
-        <div class="d-flex p-2 justify-content-between">
+        <div class="d-flex p-2 justify-content-between align-items-center">
             <h2>Welcome <span style="color: #2450ff"><?=$_SESSION['login']?></span></h2>
             <a href="../../" class="btn btn-primary">Home</a>
         </div>

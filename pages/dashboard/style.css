@@ -16,6 +16,7 @@
 
 .buttons-group{
     display: flex;
+    flex-wrap: wrap;
     gap: 10px;
 }
 
@@ -52,4 +53,10 @@
 
 .event-details-link span:hover{
     text-decoration: underline;
+}
+
+@media screen and (max-width: 767px) {
+    .buttons{
+        font-size: 12px;
+    }
 }
