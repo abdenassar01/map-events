@@ -7,7 +7,6 @@ if(isset($_GET['id']) && !empty($db)){
     $st->bindParam(":id", $_GET['id']);
     if($st->execute()){
         $event = $st->fetchAll(PDO::FETCH_ASSOC)[0];
-        print_r($event);
     }
 }
 ?>
@@ -70,7 +69,13 @@ if(isset($_GET['id']) && !empty($db)){
             <section class="left border">
                 <h3>The Event</h3>
                 <img src="../../api/image/<?=$event['image']?>" alt="" class="poster" />
-                <video src="../../api/video/<?=$event['video']?>" class="poster" controls></video>
+                <?php
+                    if($event['video']){
+                        ?>
+                            <video src="../../api/video/<?=$event['video']?>" class="teaser" controls></video>
+                        <?php
+                    }
+                ?>
                 <div class="description">
                     <?=$event['description']?>
                 </div>

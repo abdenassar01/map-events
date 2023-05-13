@@ -47,10 +47,10 @@ teaser.addEventListener('change', (event) => {
 
 const poster = document.querySelector('#poster');
 
-function loadData(selector) {
+function loadData(selector, tag) {
     return (e) => {
         const preview = document.querySelector(selector);
-        const file = poster.files[0];
+        const file = tag.files[0];
         const reader = new FileReader();
 
         reader.addEventListener("load", () => {
@@ -63,9 +63,9 @@ function loadData(selector) {
     };
 }
 
-poster.addEventListener('change', loadData('.event-image'), false)
+poster.addEventListener('change', loadData('.event-image', poster), false)
 
-teaser.addEventListener('change', loadData('.event-image'), false)
+teaser.addEventListener('change', loadData('.event-video', teaser), false)
 
 fetch("../../frontend/assets/data.json")
     .then(data => data.json())

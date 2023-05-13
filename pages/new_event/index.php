@@ -98,7 +98,7 @@
                 <input type="file" accept="video/mp4, video/mkv" id="teaser" name="teaser" class="form-control"  />
                 <?php
                     if (isset($event['video'])){
-                        echo "<img class='event-image' src='../../api/video/".$event['video']."' />";
+                        echo "<video class='event-video' src='../../api/video/".$event['video']."' controls/>";
                     }
                 ?>
             </div>

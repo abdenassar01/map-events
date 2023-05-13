@@ -32,6 +32,13 @@
     border-radius: 10px;
 }
 
+.poster {
+    margin-top: 10px;
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}
+
 .flex-wrapper{
     display: flex;
     justify-content: space-between;
