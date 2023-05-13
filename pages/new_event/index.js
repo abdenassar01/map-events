@@ -32,21 +32,40 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 })
 
+const teaser = document.getElementById('teaser')
+
+teaser.addEventListener('change', (event) => {
+    const target = event.target
+    if (target.files && target.files[0]) {
+        const maxAllowedSize = 5 * 1024 * 1024;
+        if (target.files[0].size > maxAllowedSize) {
+            alert('video is bigger than allowed size. make sure to upload a video smaller than 5Mo');
+            target.value = ''
+        }
+    }
+})
+
 const poster = document.querySelector('#poster');
 
-poster.addEventListener('change', (e) => {
-    const preview = document.querySelector('.event-image');
-    const file = poster.files[0];
-    const reader = new FileReader();
+function loadData(selector) {
+    return (e) => {
+        const preview = document.querySelector(selector);
+        const file = poster.files[0];
+        const reader = new FileReader();
 
-    reader.addEventListener("load", () => {
-        preview.src = reader.result;
-    }, false);
+        reader.addEventListener("load", () => {
+            preview.src = reader.result;
+        }, false);
 
-    if (file) {
-        reader.readAsDataURL(file);
-    }
-}, false)
+        if (file) {
+            reader.readAsDataURL(file);
+        }
+    };
+}
+
+poster.addEventListener('change', loadData('.event-image'), false)
+
+teaser.addEventListener('change', loadData('.event-image'), false)
 
 fetch("../../frontend/assets/data.json")
     .then(data => data.json())

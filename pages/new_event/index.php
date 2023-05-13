@@ -93,6 +93,15 @@
                     }
                 ?>
             </div>
+            <div class="form-outline mb-4">
+                <label class="form-label" for="teaser">Teaser:</label>
+                <input type="file" accept="video/mp4, video/mkv" id="teaser" name="teaser" class="form-control"  />
+                <?php
+                    if (isset($event['video'])){
+                        echo "<img class='event-image' src='../../api/video/".$event['video']."' />";
+                    }
+                ?>
+            </div>
             <div class="form-outline mb-4 mt-5">
                 <label class="form-label" for="description">Description:</label>
                 <div data-tiny-editor data-bold="no">

@@ -1,6 +1,7 @@
 <?php
     session_start();
     $poster = "";
+    $teaser = "";
     $user = $_SESSION['user_id'];
 
     if($_FILES["poster"]){
@@ -13,12 +14,22 @@
         }
     }
 
+    if($_FILES["teaser"]){
+        $filename = $_FILES["teaser"]["name"];
+        $tempname = $_FILES["teaser"]["tmp_name"];
+        $folder = "../video/" . $filename;
+
+        if (move_uploaded_file($tempname, $folder)){
+            $poster = $filename;
+        }
+    }
+
     $sql = "";
 
     if(isset($_POST['id'])){
-        $sql = "UPDATE `event` SET `departement_id` = :department, `title` = :title, `description` = :description, `type` = :type, `image` = :poster, `lng` = :lng, `lat` = :lat, `user_id` = :user, `start_time` = :start_date, `end_time` = :end_date WHERE id = :id;";
+        $sql = "UPDATE `event` SET `departement_id` = :department, `title` = :title, `description` = :description, `type` = :type, `image` = :poster, `video` = :teaser ,`lng` = :lng, `lat` = :lat, `user_id` = :user, `start_time` = :start_date, `end_time` = :end_date WHERE id = :id;";
     }else{
-        $sql = "INSERT INTO `event` (`departement_id`, `title`, `description`, `type`, `image`, `lng`, `lat`, `user_id`, `start_time`, `end_time`, `date_created`) VALUES (:department, :title, :description, :type, :poster, :lng, :lat, :user, :start_date, :end_date, CURDATE());";
+        $sql = "INSERT INTO `event` (`departement_id`, `title`, `description`, `type`, `image`, `video`, `lng`, `lat`, `user_id`, `start_time`, `end_time`, `date_created`) VALUES (:department, :title, :description, :type, :poster, :teaser, :lng, :lat, :user, :start_date, :end_date, CURDATE());";
     }
 
     include("../../config/db.php");
@@ -30,6 +41,7 @@
             $st->bindParam(":title", $_POST['title']);
             $st->bindParam(":type", $_POST['type']);
             $st->bindParam(":poster", $poster);
+            $st->bindParam(":teaser", $teaser);
             $st->bindParam(":lng", $_POST['longitude']);
             $st->bindParam(":lat", $_POST['latitude']);
             $st->bindParam(":user", $user);
