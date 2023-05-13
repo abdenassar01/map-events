@@ -154,3 +154,13 @@ tr, td, th, .event-info{
     color: #fc2525;
     box-shadow: none;
 }
+
+@media screen and (max-width: 676px) {
+    .card{
+        width: 100%;
+    }
+
+    .container{
+        padding: 10px;
+    }
+}

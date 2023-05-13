@@ -61,7 +61,7 @@
                                         <span><?=$value['title']?></span>
                                     </a>
                                 </td>
-                                <td>
+                                <td class="buttons-group">
                                     <a href='../new_event/?id=<?=$value['id']?>' class='btn btn-success' >update</a>
                                     <a href='delete.php?id=<?=$value['id']?>' class='btn btn-danger' onclick='return confirm("Are you sure you want to delete this event?")'>Delete</a>
                                     <?php

@@ -27,13 +27,15 @@ SET time_zone = "+00:00";
 -- Table structure for table `attachment`
 --
 
+
+
 CREATE TABLE `attachment` (
   `id` int NOT NULL,
   `event_id` int DEFAULT NULL,
   `path` varchar(1024) DEFAULT NULL,
   `type` varchar(50) DEFAULT NULL,
   `size` double DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 -- --------------------------------------------------------
 
@@ -44,7 +46,7 @@ CREATE TABLE `attachment` (
 CREATE TABLE `departement` (
   `id` int NOT NULL,
   `name` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `departement`
@@ -123,14 +125,14 @@ CREATE TABLE `event` (
   `description` varchar(2555) DEFAULT NULL,
   `type` varchar(100) DEFAULT NULL,
   `image` varchar(100) DEFAULT NULL,
-  `status` varchar(20) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'unapproved',
+  `status` varchar(20) CHARACTER SET utf8mb4  NOT NULL DEFAULT 'unapproved',
   `lng` double DEFAULT NULL,
   `lat` double DEFAULT NULL,
   `user_id` int DEFAULT NULL,
   `start_time` date DEFAULT NULL,
   `end_time` date DEFAULT NULL,
   `date_created` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `event`
@@ -174,7 +176,7 @@ CREATE TABLE `user` (
   `role` varchar(10) DEFAULT NULL,
   `name` varchar(100) NOT NULL,
   `lastname` varchar(100) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 ;
 
 --
 -- Dumping data for table `user`
