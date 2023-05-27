@@ -60,7 +60,7 @@ fetch("frontend/assets/data.json")
                         const endTime = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2));
                         const marker = L.marker([event.lat, event.lng], {
                             icon: L.icon({
-                                iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB" }.png`,
+                                iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "F0wThWc" : event.type === "autre" ? "Gn04lg5" : "ZbBIlQB" }.png`,
                                 iconSize: [36, 36],
                                 iconAnchor: [12, 36],
                                 popupAnchor: [5, 0],
@@ -105,7 +105,7 @@ function zoomToFeature(e) {
                     const endTime = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2));
                     const marker = L.marker([event.lat, event.lng], {
                         icon: L.icon({
-                            iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB" }.png`,
+                            iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "F0wThWc" : event.type === "autre" ? "Gn04lg5" : "ZbBIlQB" }.png`,
                             iconSize: [36, 36],
                             iconAnchor: [12, 36],
                             popupAnchor: [5, 0],
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", () => {
         .then(events => {
             events.map(event => {
                 if (event.status === "approved"){
-                    sidebar.innerHTML += `<div onclick='focusEvent(${ event.id })' class='sidebar-event-item'>` + event.title +`<img src='https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB"}.png' alt='' /></div>`
+                    sidebar.innerHTML += `<div onclick='focusEvent(${ event.id })' class='sidebar-event-item'>` + event.title +`<img src='https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "F0wThWc" : event.type === "autre" ? "Gn04lg5" : "ZbBIlQB" }.png' alt='' /></div>`
                 }
             })
         })
@@ -183,7 +183,7 @@ function focusEvent(id){
                 const endTime = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2));
                 const marker = L.marker([event.lat, event.lng], {
                     icon: L.icon({
-                        iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "Gn04lg5" : "ZbBIlQB" }.png`,
+                        iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "F0wThWc" : event.type === "autre" ? "Gn04lg5" : "ZbBIlQB" }.png`,
                         iconSize: [36, 36],
                         iconAnchor: [12, 36],
                         popupAnchor: [5, 0],

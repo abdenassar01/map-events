@@ -15,12 +15,12 @@
     }
 
     if($_FILES["teaser"]){
-        $filename = $_FILES["teaser"]["name"];
-        $tempname = $_FILES["teaser"]["tmp_name"];
-        $folder = "../video/" . $filename;
+        $teaser_filename = $_FILES["teaser"]["name"];
+        $teaser_tempname = $_FILES["teaser"]["tmp_name"];
+        $teaser_folder = "../video/" . $teaser_filename;
 
-        if (move_uploaded_file($tempname, $folder)){
-            $poster = $filename;
+        if (move_uploaded_file($teaser_tempname, $teaser_folder)){
+            $teaser = $teaser_filename;
         }
     }
 

@@ -60,10 +60,11 @@
             <div class="col-md-6">
                 <label class="form-label" for="type">Type:</label>
                 <select class="form-select" name="type" aria-label="event type" required>
-                    <option value="liberation"<?=(isset($event['type']) && $event['type'] === 'liberation') ? 'selected' : '' ?>>Événement historique lies à la lutte de libération nationale</option>
-                    <option value="compagne"<?=(isset($event['type']) && $event['type'] === 'compagne') ? 'selected' : '' ?>>Événement lies à notre compagne politique actuelle</option>
-                    <option value="culture"<?=(isset($event['type']) && $event['type'] === 'culture') ? 'selected' : '' ?>>Événement culturels actuels</option>
-                    <option value="autre"<?=(isset($event['type']) && $event['type'] === 'autre') ? 'selected' : '' ?>>Événement des autres acteurs société civile</option>
+                    <option value="liberation"<?=(isset($event['type']) && $event['type'] === 'liberation') ? 'selected' : '' ?>>Événement Historique</option>
+                    <option value="compagne"<?=(isset($event['type']) && $event['type'] === 'compagne') ? 'selected' : '' ?>>Événement Compagne</option>
+                    <option value="culture"<?=(isset($event['type']) && $event['type'] === 'culture') ? 'selected' : '' ?>>Événement Culturels</option>
+                    <option value="traditionnel"<?=(isset($event['type']) && $event['type'] === 'traditionnel') ? 'selected' : '' ?>>Autres Traditionnel </option>
+                    <option value="autre"<?=(isset($event['type']) && $event['type'] === 'autre') ? 'selected' : '' ?>>Autres Événement </option>
                 </select>
             </div>
             <div class="col-md-6">
