@@ -63,7 +63,7 @@
                     <option value="liberation"<?=(isset($event['type']) && $event['type'] === 'liberation') ? 'selected' : '' ?>>Événement Historique</option>
                     <option value="compagne"<?=(isset($event['type']) && $event['type'] === 'compagne') ? 'selected' : '' ?>>Événement Compagne</option>
                     <option value="culture"<?=(isset($event['type']) && $event['type'] === 'culture') ? 'selected' : '' ?>>Événement Culturels</option>
-                    <option value="traditionnel"<?=(isset($event['type']) && $event['type'] === 'traditionnel') ? 'selected' : '' ?>>Autres Traditionnel </option>
+                    <option value="traditionnel"<?=(isset($event['type']) && $event['type'] === 'traditionnel') ? 'selected' : '' ?>>Événement Traditionnel </option>
                     <option value="autre"<?=(isset($event['type']) && $event['type'] === 'autre') ? 'selected' : '' ?>>Autres Événement </option>
                 </select>
             </div>
@@ -122,6 +122,7 @@
             <input type="hidden" name="latitude" id="latitude" value="<?=isset($event['lat']) ? $event['lat'] : '' ?>" />
             <input type="hidden" name="department" id="department" value="<?=isset($event['departement_id']) ? $event['departement_id'] : '' ?>" />
             <input type="hidden" name="description" id="description" value="<?=isset($event['description']) ? $event['description'] : '' ?>" />
+            <input type="hidden" name="teaser-input" id="teaser-input" value="<?=isset($event['video']) ? $event['video'] : '' ?>" />
             <input type="submit" name="submit" class="btn btn-primary btn-block mb-4 m-2" value="<?=isset($_GET['id']) ? "update" : "add"?> event">
         </form>
     </div>

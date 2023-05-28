@@ -92,8 +92,9 @@ function progressHandler(event) {
 }
 function completeHandler(event) {
     const data = JSON.parse(event.target.responseText)
-    const videoInput = document.getElementById("teaser")
+    const videoInput = document.getElementById("teaser-input")
     videoInput.value = data?.file?.teaser?.name
+    document.getElementById("teaser").value = ""
     // console.log(data.file.teaser.name);
     document.getElementById("progressBar").value = 0;//Set progress bar to 0
     document.getElementById('progressDiv').style.display = 'none';//Hide progress bar

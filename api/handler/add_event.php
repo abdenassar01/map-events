@@ -30,7 +30,7 @@
             $st->bindParam(":title", $_POST['title']);
             $st->bindParam(":type", $_POST['type']);
             $st->bindParam(":poster", $poster);
-            $st->bindParam(":teaser", $_FILES["teaser"]["name"]);
+            $st->bindParam(":teaser", $_POST['teaser-input']);
             $st->bindParam(":lng", $_POST['longitude']);
             $st->bindParam(":lat", $_POST['latitude']);
             $st->bindParam(":user", $user);
