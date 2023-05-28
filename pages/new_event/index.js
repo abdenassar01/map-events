@@ -65,7 +65,45 @@ function loadData(selector, tag) {
 
 poster.addEventListener('change', loadData('.event-image', poster), false)
 
-teaser.addEventListener('change', loadData('.event-video', teaser), false)
+teaser.addEventListener('change', uploadFileHandler, false)
+// teaser.addEventListener('change', loadData('.event-video', teaser), false)
+
+function uploadFileHandler() {
+    document.getElementById('progressDiv').style.display='block';
+    const file = document.getElementById("teaser").files[0];
+    const formdata = new FormData();
+    formdata.append("teaser", file);
+    const ajax = new XMLHttpRequest();
+    ajax.upload.addEventListener("progress", progressHandler, false);
+    ajax.addEventListener("load", completeHandler, false);
+    ajax.addEventListener("error", errorHandler, false);
+    ajax.addEventListener("abort", abortHandler, false);
+    ajax.open("POST", "../../api/handler/upload_video.php");
+    ajax.send(formdata);
+}
+function progressHandler(event) {
+    document.getElementById("progress-wrapper").style.display = "block"
+    let loaded = new Number((event.loaded / 1048576));//Make loaded a "number" and divide bytes to get Megabytes
+    let total = new Number((event.total / 1048576));//Make total file size a "number" and divide bytes to get Megabytes
+    document.getElementById("uploaded_progress").innerHTML = "Uploaded " + loaded.toPrecision(5) + " Megabytes of " + total.toPrecision(5);//String output
+    let percent = (event.loaded / event.total) * 100;//Get percentage of upload progress
+    document.getElementById("progressBar").value = Math.round(percent);//Round value to solid
+    document.getElementById("status").innerHTML = Math.round(percent) + "% uploaded";//String output
+}
+function completeHandler(event) {
+    const data = JSON.parse(event.target.responseText)
+    const videoInput = document.getElementById("teaser")
+    videoInput.value = data?.file?.teaser?.name
+    // console.log(data.file.teaser.name);
+    document.getElementById("progressBar").value = 0;//Set progress bar to 0
+    document.getElementById('progressDiv').style.display = 'none';//Hide progress bar
+}
+function errorHandler(event) {
+    document.getElementById("status").innerHTML = "Upload Failed";//Switch status to upload failed
+}
+function abortHandler(event) {
+    document.getElementById("status").innerHTML = "Upload Aborted";//Switch status to aborted
+}
 
 fetch("../../frontend/assets/data.json")
     .then(data => data.json())

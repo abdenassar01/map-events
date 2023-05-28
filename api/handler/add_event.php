@@ -1,7 +1,6 @@
 <?php
     session_start();
     $poster = "";
-    $teaser = "";
     $user = $_SESSION['user_id'];
 
     if($_FILES["poster"]){
@@ -11,16 +10,6 @@
 
         if (move_uploaded_file($tempname, $folder)){
             $poster = $filename;
-        }
-    }
-
-    if($_FILES["teaser"]){
-        $teaser_filename = $_FILES["teaser"]["name"];
-        $teaser_tempname = $_FILES["teaser"]["tmp_name"];
-        $teaser_folder = "../video/" . $teaser_filename;
-
-        if (move_uploaded_file($teaser_tempname, $teaser_folder)){
-            $teaser = $teaser_filename;
         }
     }
 
@@ -41,7 +30,7 @@
             $st->bindParam(":title", $_POST['title']);
             $st->bindParam(":type", $_POST['type']);
             $st->bindParam(":poster", $poster);
-            $st->bindParam(":teaser", $teaser);
+            $st->bindParam(":teaser", $_FILES["teaser"]["name"]);
             $st->bindParam(":lng", $_POST['longitude']);
             $st->bindParam(":lat", $_POST['latitude']);
             $st->bindParam(":user", $user);

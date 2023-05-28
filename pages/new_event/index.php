@@ -102,6 +102,15 @@
                         echo "<video class='event-video' src='../../api/video/".$event['video']."' controls/>";
                     }
                 ?>
+                <div id="progress-wrapper" style="display: none">
+                    <div class='progress' id='progressDiv' style='display:none; margin-top: 20px'>
+                        <progress id='progressBar' value='0' max='100' style='width:100%; height: 1.2rem;'></progress>
+                    </div>
+                    <div class='form-group' style="margin-top: 10px">
+                        <h3 id='status'></h3>
+                        <p id='uploaded_progress'></p>
+                    </div>
+                </div>
             </div>
             <div class="form-outline mb-4 mt-5">
                 <label class="form-label" for="description">Description:</label>
