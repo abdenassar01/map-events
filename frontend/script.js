@@ -35,44 +35,63 @@ let geoJson = L.geoJson(null, {
     onEachFeature: onEachFeature,
 }).addTo(map);
 
-fetch("frontend/assets/data.json")
-    .then(data => data.json())
-    .then(res => {
-        res.features.map(setTimeout(feature => {
-            fetch("api/events/count/index.php?departement=" + feature.properties.name)
+
+fetch("api/events/count/all")
+    .then(res => res.json())
+    .then(data => {
+        let departments = [];
+        data.map(item => {
+                departments.push({
+                    name: item.name,
+                    nbr_events: item.nbr_events
+                })
+            })
+        return departments;
+        }
+    ).then(
+        departments =>
+    fetch("frontend/assets/data.json")
+        .then(data => data.json())
+        .then(res => {
+            res?.features.map(
+                feature => {
+                    departments.map(department => {
+                        if(department.name === feature.properties.name){
+                            geoJson.addData({
+                                ...feature,
+                                properties: {
+                                    ...feature.properties,
+                                    nb_events: department.nbr_events,
+                                }
+                            })
+                        }
+                    })
+                });
+            fetch("api/events/latest/")
                 .then(res => res.json())
-                .then(data => {
-                    geoJson.addData({
-                        ...feature,
-                        properties: {
-                            ...feature.properties,
-                            nb_events: data.nbr_events,
+                .then(events => {
+                    events.map(event => {
+                        if (event.status === "approved"){
+                            const dateParts = event.end_time.split("-");
+                            const endTime = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2));
+                            const marker = L.marker([event.lat, event.lng], {
+                                icon: L.icon({
+                                    iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "F0wThWc" : event.type === "autre" ? "Gn04lg5" : "ZbBIlQB" }.png`,
+                                    iconSize: [36, 36],
+                                    iconAnchor: [12, 36],
+                                    popupAnchor: [5, 0],
+                                })
+                            }).addTo(map)
+                                .bindPopup("<div class='event-card'><p class='title'>" + event.title + `</p><br><div class='card-footer'><div class='date'>Ends in: ${ endTime.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }</div><a style='color: white' class='event-details-btn' href='./pages/event_details/?id=${ event.id }'>see details</a></div></div>`);
+
+                            markers.push(marker)
                         }
                     })
                 })
-        }, 300));
-        fetch("api/events/latest/")
-            .then(res => res.json())
-            .then(events => {
-                events.map(event => {
-                    if (event.status === "approved"){
-                        const dateParts = event.end_time.split("-");
-                        const endTime = new Date(dateParts[0], dateParts[1] - 1, dateParts[2].substr(0,2));
-                        const marker = L.marker([event.lat, event.lng], {
-                            icon: L.icon({
-                                iconUrl: `https://i.imgur.com/${event.type === "liberation" ? "pr1H9uO" : event.type === "compagne" ? "dS4Ens6" : event.type === "culture" ? "F0wThWc" : event.type === "autre" ? "Gn04lg5" : "ZbBIlQB" }.png`,
-                                iconSize: [36, 36],
-                                iconAnchor: [12, 36],
-                                popupAnchor: [5, 0],
-                            })
-                        }).addTo(map)
-                            .bindPopup("<div class='event-card'><p class='title'>" + event.title + `</p><br><div class='card-footer'><div class='date'>Ends in: ${ endTime.toLocaleDateString("en-US", { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' }) }</div><a style='color: white' class='event-details-btn' href='./pages/event_details/?id=${ event.id }'>see details</a></div></div>`);
-
-                        markers.push(marker)
-                    }
-                })
-            })
-    })
+        })
+        .then(console.log(geoJson))
+        .catch(err => console.log(err))
+)
     .catch(err => console.log(err))
 
 function highlightFeature(e) {

@@ -3,9 +3,10 @@
     include("../../../../config/db.php");
     if(!empty($db)){
 
-        $req = "select departement_id as 'departement', count(id) as 'nbr_events' from event where status = 'approved' group by departement_id;";
+        $req = "SELECT  D.id, D.name, COUNT(E.id) as 'nbr_events' FROM `departement` D LEFT JOIN `event` E on E.departement_id = D.id GROUP BY D.id;";
         $st = $db->prepare($req);
         if($st->execute()){
+            header("Content-Type: application/json");
             echo json_encode($st->fetchAll(PDO::FETCH_ASSOC));
         }
     }

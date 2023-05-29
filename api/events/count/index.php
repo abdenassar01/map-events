@@ -8,12 +8,14 @@
                 $st = $db->prepare($req);
                 $st->bindParam(":department", $_GET['departement']);
                 if($st->execute()){
+                    header("Content-Type: application/json");
                     echo json_encode($st->fetchAll(PDO::FETCH_ASSOC)[0]);
                 }
             }else{
-                $req = "select count(*) as 'nbr_events' from event and status = 'approved';";
+                $req = "select count(*) as 'nbr_events' from event where status = 'approved';";
                 $st = $db->prepare($req);
                 if($st->execute()){
+                    header("Content-Type: application/json");
                     echo json_encode($st->fetchAll(PDO::FETCH_ASSOC)[0]);
                 }
             }

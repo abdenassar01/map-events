@@ -69,13 +69,15 @@ if(isset($_GET['id']) && !empty($db)){
             <section class="left border">
                 <h3>The Event</h3>
                 <img src="../../api/image/<?=$event['image']?>" alt="" class="poster" />
-                <?php
+                <div class="spacer"></div>
+                    <?php
                     if($event['video']){
                         ?>
-                            <video src="../../api/video/<?=$event['video']?>" class="teaser" controls></video>
+                        <video src="../../api/video/<?=$event['video']?>" class="teaser" controls></video>
                         <?php
                     }
-                ?>
+                    ?>
+                <div class="spacer"></div>
                 <div class="description">
                     <?=$event['description']?>
                 </div>
