@@ -38,7 +38,7 @@ let geoJson = L.geoJson(null, {
 fetch("frontend/assets/data.json")
     .then(data => data.json())
     .then(res => {
-        res.features.map(feature => {
+        res.features.map(setTimeout(feature => {
             fetch("api/events/count/index.php?departement=" + feature.properties.name)
                 .then(res => res.json())
                 .then(data => {
@@ -50,7 +50,7 @@ fetch("frontend/assets/data.json")
                         }
                     })
                 })
-        });
+        }, 300));
         fetch("api/events/latest/")
             .then(res => res.json())
             .then(events => {
