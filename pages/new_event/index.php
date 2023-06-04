@@ -47,7 +47,7 @@
         <p>Chose event location: </p>
         <div id="map" ></div>
         <br />
-        <form class="row g-2" method="post" enctype="multipart/form-data" action="../../api/handler/add_event.php">
+        <form class="row g-2" onsubmit="return validateAddingEvent()" method="post" enctype="multipart/form-data" action="../../api/handler/add_event.php">
             <?php
                 if(isset($_GET['id'])){
                     echo "<input type='hidden' name='id' value='".$_GET['id']."' />";

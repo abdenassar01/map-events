@@ -192,6 +192,17 @@ map.on('click', function(e) {
     markers.push(position);
 });
 
+function validateAddingEvent() {
+    const langitude = document.getElementById('longitude');
+    const latitude = document.getElementById('latitude');
+
+
+    if ((langitude.value === "" || langitude.value === null) || (latitude.value === "" || latitude.value === null)) {
+        alert("You have to select the location first");
+        return false;
+    }
+}
+
 document
     .querySelectorAll('[data-tiny-editor]')
     .forEach(editor =>
