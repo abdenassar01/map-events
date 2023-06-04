@@ -149,7 +149,7 @@ function onEachFeature(feature, layer) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    fetch("api/events/count/all/")
+    fetch("api/events/count/all/filled/")
         .then(res => res.json())
         .then(eventsCounts => {
             const key = document.querySelector('.key');

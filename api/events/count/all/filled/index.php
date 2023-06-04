@@ -1,19 +1,20 @@
 <?php
 
-    include("../../../../config/db.php");
+    include("../../../../../config/db.php");
     if(!empty($db)){
     
      function utf8ize($d){ 
-        if (is_array($d) || is_object($d))
-        foreach ($d as &$v) $v = utf8ize($v);
-        else
-        return utf8_encode($d);
+	if (is_array($d) || is_object($d))
+	foreach ($d as &$v) $v = utf8ize($v);
+	else
+	return utf8_encode($d);
 
-        return $d;
+	return $d;
      }
 
-        $req = "SELECT  D.id, D.name, COUNT(E.id) as 'nbr_events' FROM `departement` D LEFT JOIN `event` E on E.departement_id = D.id GROUP BY D.id;";
-        $st = $db->prepare($req);
+        $req = "SELECT  D.id, D.name, COUNT(E.id) as 'nbr_events' FROM `departement` D INNER JOIN `event` E on E.departement_id = D.id GROUP BY D.id";
+     
+     $st = $db->prepare($req);
         if($st->execute()){
         	// echo "I'm testing again inside execute second";
         	header("Content-Type: application/json");
