@@ -183,18 +183,19 @@ let geoJson = L.geoJson(null, {
     },
 }).addTo(map);
 
-
-map.on('click', function(e) {
-
-    markers.forEach(marker => map.removeLayer(marker));
-
-    let position = L.marker(e.latlng).addTo(map);
-    markers.push(position);
-});
+// map.on('click', function(e) {
+//
+//     markers.forEach(marker => map.removeLayer(marker));
+//
+//     let position = L.marker(e.latlng).addTo(map);
+//     markers.push(position);
+// });
 
 function validateAddingEvent() {
     const langitude = document.getElementById('longitude');
     const latitude = document.getElementById('latitude');
+
+    // const region = document.getElementById("department");
 
 
     if ((langitude.value === "" || langitude.value === null) || (latitude.value === "" || latitude.value === null)) {

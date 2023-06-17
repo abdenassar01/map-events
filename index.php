@@ -11,11 +11,43 @@
     <link rel="stylesheet" href="./frontend/assets/styles/styles.css">
 </head>
 <body>
+<div style="position: absolute; z-index: 9999" >
+    <button type="button" id="show-modal" style="display: none" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        Launch modal
+    </button>
+
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Event added</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    Event Added Successfully
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Ok</button>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
     <div class="">
         <?php
+            if (isset($_GET['success'])){
+                ?>
+                <script>
+                    document.addEventListener("DOMContentLoaded", () => {
+                        const modalBtn = document.getElementById("show-modal");
+                        modalBtn.click();
+                    })
+                </script>
+                <?php
+            }
             include('./components/header.php')
         ?>
-        <div class="main">
             <?php
                 include('./components/sidebar.php')
             ?>

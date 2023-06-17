@@ -1,3 +1,4 @@
+
 <?php
     session_start();
     $poster = "";
@@ -42,7 +43,7 @@
             }
 
             if ($st->execute()) {
-                header("Location: ../../");
+                header("Location: ../../?success=1");
             }
         }
     }catch (Exception $ex){
