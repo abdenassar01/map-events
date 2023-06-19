@@ -94,7 +94,8 @@ function completeHandler(event) {
     const data = JSON.parse(event.target.responseText)
     const videoInput = document.getElementById("teaser-input")
     videoInput.value = data?.file?.teaser?.name
-    document.getElementById("teaser").value = ""
+     const teaserInput =  document.getElementById("teaser");
+    teaserInput.remove();
     // console.log(data.file.teaser.name);
     document.getElementById("progressBar").value = 0;//Set progress bar to 0
     document.getElementById('progressDiv').style.display = 'none';//Hide progress bar
@@ -194,9 +195,13 @@ let geoJson = L.geoJson(null, {
 function validateAddingEvent() {
     const langitude = document.getElementById('longitude');
     const latitude = document.getElementById('latitude');
+    const end_date = document.getElementById('end_date');
+    const start_date = document.getElementById('start_date');
 
-    // const region = document.getElementById("department");
-
+    if (new Date(end_date.value) < new Date(start_date.value)){
+        alert("start date should be bigger than end date");
+        return false;
+    }
 
     if ((langitude.value === "" || langitude.value === null) || (latitude.value === "" || latitude.value === null)) {
         alert("You have to select the location first");
