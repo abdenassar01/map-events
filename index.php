@@ -33,7 +33,6 @@
         </div>
     </div>
 </div>
-
     <div class="">
         <?php
             if (isset($_GET['success'])){
@@ -48,10 +47,13 @@
             }
             include('./components/header.php')
         ?>
-            <?php
+        <div style="display: flex">
+        <?php
                 include('./components/sidebar.php')
             ?>
             <div id="map"></div>
+        </div>
+           
         </div>
     </div>
     <div class="key"></div>
